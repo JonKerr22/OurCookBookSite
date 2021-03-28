@@ -6,16 +6,17 @@ Code repository to run ourcook.book (domain name pending) locally
 
 ## Start Flask
 
-navigate into the ./Flask folder and run command 'python3 RestService.py'
-this can be directly accessed locally through http://localhost:5000/
+navigate into the ./Flask folder and run command `python3 RestService.py`, 
 
+this can be directly accessed locally through `http://localhost:5000/`
 
 
 # Front End Directions
 
 ## Development server
 
-Make sure to be in the same directory as this Read Me
+Make sure to be in the same directory as this Read Me.  
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## General Angular Help
