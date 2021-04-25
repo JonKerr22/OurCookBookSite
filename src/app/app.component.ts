@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { RestService } from './Services/rest.service';
 import { User } from './Models/user';
-import { stringify } from '@angular/compiler/src/util';
+import { environment } from '../environments/environment'
  
 @Component({
   selector: 'app-root',
@@ -11,6 +11,7 @@ import { stringify } from '@angular/compiler/src/util';
 })
 export class AppComponent implements OnInit {
   title = 'OurCookBook';
+  env = environment;
 
   constructor(private restService: RestService) {}
 

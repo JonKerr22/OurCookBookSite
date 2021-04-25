@@ -19,6 +19,12 @@ Make sure to be in the same directory as this Read Me.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+Testing and Prod environments can be run by adding `--configuration=testing` or `--configuration=production` to the `ng serve` command
+
+## Debugging Tips
+
+If angular server is still runnning after using ctrl + c to kill the thread (getting an error about the standard front end port being already in use is usually what this indicates) use these stackoverflow tips to find the process it and kill it: https://stackoverflow.com/questions/39074678/how-to-end-ng-serve-or-firebase-serve
+
 ## General Angular Help
 
 ### Code scaffolding

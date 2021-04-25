@@ -3,11 +3,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../Models/user';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService implements OnInit {
+  apiUrlBase = environment.apiUrl ? environment.apiUrl : 'http://localhost:5000'; // for now default to localhost, no test or prod env
 
   constructor(private httpClient: HttpClient ) {
   }
@@ -16,12 +18,12 @@ export class RestService implements OnInit {
   }
 
   getUsers(): Observable<any> {
-    const usersUrl = 'http://127.0.0.1:5000/allUsers';
+    const usersUrl = `${this.apiUrlBase}/allUsers`;
     return this.httpClient.get(usersUrl);
   }
 
   getCodezUp() {
-    const url = 'http://127.0.0.1:5000/';
+    const url = `${this.apiUrlBase}/`;
     return this.httpClient.get(url);
   }
 

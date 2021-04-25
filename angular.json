@@ -56,6 +56,34 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "testing": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },
@@ -67,6 +95,9 @@
           "configurations": {
             "production": {
               "browserTarget": "OurCookBook:build:production"
+            },
+            "testing" : {
+              "browserTarget": "OurCookBook:build:testing"
             }
           }
         },
@@ -114,7 +145,22 @@
           },
           "configurations": {
             "production": {
-              "devServerTarget": "OurCookBook:serve:production"
+              "devServerTarget": "OurCookBook:serve:production",
+              "fileReplacements": [
+                {
+                "replace" : "src/environments/environment.ts",
+                "with" : "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "testing": {
+              "devServerTarget": "OurCookBook:serve:testing",
+              "fileReplacements": [
+                {
+                "replace" : "src/environments/environment.ts",
+                "with" : "src/environments/environment.test.ts"
+                }
+              ]
             }
           }
         }
