@@ -27,4 +27,9 @@ export class RestService implements OnInit {
     return this.httpClient.get(url);
   }
 
+  getFirstTableData(): Observable<any> {
+    const firstTableUrl = `${this.apiUrlBase}/firstTableAll`;
+    return this.httpClient.get(firstTableUrl);
+  }
+
 }

@@ -10,6 +10,10 @@ navigate into the ./Flask folder and run command `python3 RestService.py`,
 
 this can be directly accessed locally through `http://localhost:5000/`
 
+As note, this is currently hardcoded to access a database that only runs
+on my laptop. It is a longer term goal to get an actual server that holds
+the database, but since this is a personal project that's not next on the list
+
 
 # Front End Directions
 

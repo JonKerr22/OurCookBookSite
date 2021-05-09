@@ -1,6 +1,8 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
+from MySqlConnection import sqlCall
+
 import json
 
 app = Flask(__name__)
@@ -92,6 +94,13 @@ def Cookbook(cookbookId):
         if obj["id"] == cookbookId:
             return jsonify([obj])
     return "Id Not Found"
+
+@app.route("/firstTableAll", methods=['GET'])
+def FirstTableAll():
+    #todo - use the MySqlConnection file to connect to local db and pull a string in to return
+    results = sqlCall('firstTableAll')
+    return jsonify([results])
+
 
 
 if __name__ == '__main__':

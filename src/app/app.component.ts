@@ -19,8 +19,10 @@ export class AppComponent implements OnInit {
   usersObj: any;
   isError: boolean;
   codezUpStr: string;
+  firstTableAll: string;
 
   ngOnInit(){
+    // TODO - this doesnt need to be on init anymore i don't think, i believe looking into resolvers is the next step
     this.restService.getUsers().subscribe( // TODO - all this will need to get broken out and not just exist in main app
       (response) =>
         {
@@ -49,6 +51,20 @@ export class AppComponent implements OnInit {
           this.codezUpStr = error.text ?? 'Codez up error';
         }
     );
+
+    this.restService.getFirstTableData().subscribe(
+      (resp) =>  
+        {
+          console.log("firstTableAll load good, full resp: " + JSON.stringify(resp));
+          this.firstTableAll = resp[0];
+        },
+      (error) =>
+        {
+          console.log("No firstTableAll Data Found" + JSON.stringify(error));
+
+          this.firstTableAll = error.text ?? 'firstTableAll error';
+        }
+    );
   }
 
   public get allUsers(): any {
@@ -67,5 +83,8 @@ export class AppComponent implements OnInit {
 
   public get codezUpCheck(): any {
     return this.codezUpStr;
+  }
+  public get firstTableAllStr(): any {
+    return this.firstTableAll;
   }
 }
