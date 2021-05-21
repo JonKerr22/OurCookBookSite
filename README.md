@@ -23,7 +23,7 @@ Make sure to be in the same directory as this Read Me.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Testing and Prod environments can be run by adding `--configuration=testing` or `--configuration=production` to the `ng serve` command
+Testing and Prod environments can be run by adding ` --configuration=testing` or ` --configuration=production` to the `ng serve` command
 
 ## Debugging Tips
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { RestService } from './Services/rest.service';
-import { User } from './Models/user';
 import { environment } from '../environments/environment'
  
 @Component({
@@ -16,18 +15,17 @@ export class AppComponent implements OnInit {
   constructor(private restService: RestService) {}
 
   users: string;//[User];
-  usersObj: any;
   isError: boolean;
   codezUpStr: string;
   firstTableAll: string;
+  user2cookbook: string;
 
   ngOnInit(){
-    // TODO - this doesnt need to be on init anymore i don't think, i believe looking into resolvers is the next step
     this.restService.getUsers().subscribe( // TODO - all this will need to get broken out and not just exist in main app
-      (response) =>
+      (resp) =>
         {
-          this.users = JSON.stringify(response);
-          this.usersObj = response;
+          console.log("all user load good, full resp: " + JSON.stringify(resp));
+          this.users = resp[0];
           this.isError = false;
         },
       (error) =>
@@ -35,20 +33,6 @@ export class AppComponent implements OnInit {
           console.log("No user Data Found" + JSON.stringify(error));
           this.isError = true;
           this.users = "";//[new User()];
-        }
-    );
-
-    this.restService.getCodezUp().subscribe(
-      (resp) =>  
-        {
-          console.log("CodezUp load good, full resp: " + JSON.stringify(resp));
-          this.codezUpStr = resp[0];
-        },
-      (error) =>
-        {
-          console.log("No codezup Data Found" + JSON.stringify(error));
-
-          this.codezUpStr = error.text ?? 'Codez up error';
         }
     );
 
@@ -65,6 +49,20 @@ export class AppComponent implements OnInit {
           this.firstTableAll = error.text ?? 'firstTableAll error';
         }
     );
+
+    this.restService.getUser2Cookbook().subscribe(
+      (resp) =>  
+        {
+          console.log("user2 cookbook load good, full resp: " + JSON.stringify(resp));
+          this.user2cookbook = resp[0];
+        },
+      (error) =>
+        {
+          console.log("No user2 cookbook Data Found" + JSON.stringify(error));
+
+          this.user2cookbook = error.text ?? 'user2 cookbook error';
+        }
+    );
   }
 
   public get allUsers(): any {
@@ -73,18 +71,11 @@ export class AppComponent implements OnInit {
     return ['No Users Init'];
   }
 
-  private userArrToStr(users: [User]): string {
-    var resp = "";
-    
-
-
-    return resp;
-  }
-
-  public get codezUpCheck(): any {
-    return this.codezUpStr;
-  }
   public get firstTableAllStr(): any {
     return this.firstTableAll;
+  }
+
+  public get user2CookbookStr(): any {
+    return this.user2cookbook;
   }
 }

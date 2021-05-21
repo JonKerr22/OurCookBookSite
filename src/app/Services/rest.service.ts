@@ -22,14 +22,14 @@ export class RestService implements OnInit {
     return this.httpClient.get(usersUrl);
   }
 
-  getCodezUp() {
-    const url = `${this.apiUrlBase}/`;
-    return this.httpClient.get(url);
-  }
-
   getFirstTableData(): Observable<any> {
     const firstTableUrl = `${this.apiUrlBase}/firstTableAll`;
     return this.httpClient.get(firstTableUrl);
+  }
+
+  getUser2Cookbook(): Observable<any> {
+    const user2cookbookUrl = `${this.apiUrlBase}/cookbook/2`;
+    return this.httpClient.get(user2cookbookUrl);
   }
 
 }
