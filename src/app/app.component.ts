@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { RestService } from './Services/rest.service';
 import { environment } from '../environments/environment'
+import { User } from './Models/user';
+import { FirstTableObj } from './Models/firstTableObj';
+import { Cookbook } from './Models/cookbook';
  
 @Component({
   selector: 'app-root',
@@ -14,25 +17,24 @@ export class AppComponent implements OnInit {
 
   constructor(private restService: RestService) {}
 
-  users: string;//[User];
+  users: User[];
   isError: boolean;
-  codezUpStr: string;
-  firstTableAll: string;
-  user2cookbook: string;
+  firstTableAll: FirstTableObj[];
+  user2cookbook: Cookbook;
 
   ngOnInit(){
     this.restService.getUsers().subscribe( // TODO - all this will need to get broken out and not just exist in main app
       (resp) =>
         {
-          console.log("all user load good, full resp: " + JSON.stringify(resp));
-          this.users = resp[0];
+          console.log(`all user load good, full resp:  ${resp}`);
+          this.users = resp;
           this.isError = false;
         },
       (error) =>
         {
           console.log("No user Data Found" + JSON.stringify(error));
           this.isError = true;
-          this.users = "";//[new User()];
+          this.users = [];
         }
     );
 
@@ -40,13 +42,12 @@ export class AppComponent implements OnInit {
       (resp) =>  
         {
           console.log("firstTableAll load good, full resp: " + JSON.stringify(resp));
-          this.firstTableAll = resp[0];
+          this.firstTableAll = resp;
         },
       (error) =>
         {
           console.log("No firstTableAll Data Found" + JSON.stringify(error));
-
-          this.firstTableAll = error.text ?? 'firstTableAll error';
+          this.firstTableAll = [];
         }
     );
 
@@ -54,7 +55,7 @@ export class AppComponent implements OnInit {
       (resp) =>  
         {
           console.log("user2 cookbook load good, full resp: " + JSON.stringify(resp));
-          this.user2cookbook = resp[0];
+          this.user2cookbook = resp;
         },
       (error) =>
         {
@@ -67,15 +68,16 @@ export class AppComponent implements OnInit {
 
   public get allUsers(): any {
     if (this.users) { return this.users; }
-    if (this.isError) {return ['Error generated, check log']; }
-    return ['No Users Init'];
+    return [];
   }
 
   public get firstTableAllStr(): any {
     return this.firstTableAll;
   }
 
-  public get user2CookbookStr(): any {
-    return this.user2cookbook;
+  public get user2CookbookStr(): Cookbook {
+    if (this.user2cookbook) { return this.user2cookbook; }
+    return null;
+    
   }
 }

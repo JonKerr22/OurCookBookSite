@@ -17,17 +17,17 @@ def index():
 @app.route("/allUsers", methods=['GET'])
 def AllUsers():
     results = selectUsersAll()
-    return jsonify([results])
+    return jsonify(results)
 
 @app.route("/cookbook/<string:cookbookId>", methods=['GET'])
 def Cookbook(cookbookId):
     results = cookbookById(cookbookId)
-    return jsonify([results])
+    return jsonify(results)
 
 @app.route("/firstTableAll", methods=['GET'])
 def FirstTableAll():
     results = selectFirstTableAll()
-    return jsonify([results])
+    return jsonify(results)
 
 
 

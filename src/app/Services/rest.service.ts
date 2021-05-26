@@ -2,6 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from '../Models/user';
+import { FirstTableObj } from '../Models/firstTableObj';
+import { Cookbook } from '../Models/cookbook';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'
 
@@ -17,19 +19,19 @@ export class RestService implements OnInit {
   ngOnInit() {
   }
 
-  getUsers(): Observable<any> {
+  getUsers(): Observable<User[]> {
     const usersUrl = `${this.apiUrlBase}/allUsers`;
-    return this.httpClient.get(usersUrl);
+    return this.httpClient.get<User[]>(usersUrl);
   }
 
-  getFirstTableData(): Observable<any> {
+  getFirstTableData(): Observable<FirstTableObj[]> {
     const firstTableUrl = `${this.apiUrlBase}/firstTableAll`;
-    return this.httpClient.get(firstTableUrl);
+    return this.httpClient.get<FirstTableObj[]>(firstTableUrl);
   }
 
-  getUser2Cookbook(): Observable<any> {
+  getUser2Cookbook(): Observable<Cookbook> {
     const user2cookbookUrl = `${this.apiUrlBase}/cookbook/2`;
-    return this.httpClient.get(user2cookbookUrl);
+    return this.httpClient.get<Cookbook>(user2cookbookUrl);
   }
 
 }
