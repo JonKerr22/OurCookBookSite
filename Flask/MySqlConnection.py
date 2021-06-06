@@ -1,10 +1,16 @@
 import mysql.connector
 from mysql.connector import Error
+from enum import Enum
 
-sqlNameFuncMapping = {
-    'firstTableAll' : """ SELECT * FROM firstTable""",
-    'usersAll' : """ SELECT * FROM users """,
-    'cookbookById' : """ SELECT * FROM cookbooks WHERE id=#id#"""
+class SqlStoredProcedures(Enum):
+    firstTableAll = 1,
+    usersAll = 2,
+    cookBookById = 3
+
+storedProcMap = {
+    SqlStoredProcedures.firstTableAll : 'getFirstTableAll',
+    SqlStoredProcedures.usersAll : 'getAllUsers',
+    SqlStoredProcedures.cookBookById : 'getCookBook'
 }
 
 # TODO - there absolutely must be a more generic way to make these calls - probs with an enum
@@ -12,8 +18,10 @@ def selectFirstTableAll():
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.execute(sqlNameFuncMapping['firstTableAll'])
-        records = cursor.fetchall()
+        cursor.callproc(storedProcMap[SqlStoredProcedures.firstTableAll])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
 
         closeSqlConnection(connection)
 
@@ -23,8 +31,10 @@ def selectUsersAll():
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.execute(sqlNameFuncMapping['usersAll'])
-        records = cursor.fetchall()
+        cursor.callproc(storedProcMap[SqlStoredProcedures.usersAll])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
 
         closeSqlConnection(connection)
 
@@ -34,9 +44,10 @@ def cookbookById(id):
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        selectQuerString = sqlNameFuncMapping['cookbookById'].replace('#id#', id)
-        cursor.execute(selectQuerString)
-        records = cursor.fetchall()
+        cursor.callproc(storedProcMap[SqlStoredProcedures.cookBookById], [id])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
 
         closeSqlConnection(connection)
 

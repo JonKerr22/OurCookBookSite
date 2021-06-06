@@ -29,7 +29,7 @@ export class RestService implements OnInit {
     return this.httpClient.get<FirstTableObj[]>(firstTableUrl);
   }
 
-  getUser2Cookbook(): Observable<Cookbook> {
+  getCookBook2(): Observable<Cookbook> {
     const user2cookbookUrl = `${this.apiUrlBase}/cookbook/2`;
     return this.httpClient.get<Cookbook>(user2cookbookUrl);
   }

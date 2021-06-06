@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   users: User[];
   isError: boolean;
   firstTableAll: FirstTableObj[];
-  user2cookbook: Cookbook;
+  cookbook2: Cookbook;
 
   ngOnInit(){
     this.restService.getUsers().subscribe( // TODO - all this will need to get broken out and not just exist in main app
@@ -51,17 +51,17 @@ export class AppComponent implements OnInit {
         }
     );
 
-    this.restService.getUser2Cookbook().subscribe(
+    this.restService.getCookBook2().subscribe(
       (resp) =>  
         {
-          console.log("user2 cookbook load good, full resp: " + JSON.stringify(resp));
-          this.user2cookbook = resp;
+          console.log("cookbook 2 load good, full resp: " + JSON.stringify(resp));
+          this.cookbook2 = resp;
         },
       (error) =>
         {
-          console.log("No user2 cookbook Data Found" + JSON.stringify(error));
+          console.log("No cookbook 2 Data Found" + JSON.stringify(error));
 
-          this.user2cookbook = error.text ?? 'user2 cookbook error';
+          this.cookbook2 = error.text ?? 'cookbook 2 error';
         }
     );
   }
@@ -75,8 +75,8 @@ export class AppComponent implements OnInit {
     return this.firstTableAll;
   }
 
-  public get user2CookbookStr(): Cookbook {
-    if (this.user2cookbook) { return this.user2cookbook; }
+  public get cookbook2Str(): Cookbook {
+    if (this.cookbook2) { return this.cookbook2; }
     return null;
     
   }
