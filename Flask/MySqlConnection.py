@@ -44,7 +44,7 @@ def cookbookById(id):
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.callproc(storedProcMap[SqlStoredProcedures.cookBookById], [id])
+        cursor.callproc(storedProcMap[SqlStoredProcedures.cookBookById], [id, ])
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()
