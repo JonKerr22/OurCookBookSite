@@ -5,12 +5,14 @@ from enum import Enum
 class SqlStoredProcedures(Enum):
     firstTableAll = 1,
     usersAll = 2,
-    cookBookById = 3
+    cookBookById = 3,
+    cookbooksAll = 4
 
 storedProcMap = {
     SqlStoredProcedures.firstTableAll : 'getFirstTableAll',
     SqlStoredProcedures.usersAll : 'getAllUsers',
-    SqlStoredProcedures.cookBookById : 'getCookBook'
+    SqlStoredProcedures.cookBookById : 'getCookBook',
+    SqlStoredProcedures.cookbooksAll: 'getAllCookBooks'
 }
 
 # TODO - there absolutely must be a more generic way to make these calls - probs with an enum
@@ -45,6 +47,19 @@ def cookbookById(id):
     if connection.is_connected():
         cursor = connection.cursor()
         cursor.callproc(storedProcMap[SqlStoredProcedures.cookBookById], [id, ])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
+
+        closeSqlConnection(connection)
+
+        return records 
+
+def getAllCookbooks():
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcedures.cookbooksAll])
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()

@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './PageComponents/home-page/home-page.component';
 import { AllCookbooksComponent } from './PageComponents/all-cookbooks/all-cookbooks.component';
+import { AllCookbooksResolver } from './Resolvers/all-cookbooks-resolver.service';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomePageComponent},
-  { path: 'allcookbooks', component: AllCookbooksComponent}
+  { path: 'allcookbooks', component: AllCookbooksComponent, resolve: {cookbooks: AllCookbooksResolver}}
 ];
 
 @NgModule({

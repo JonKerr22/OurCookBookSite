@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-from MySqlConnection import selectFirstTableAll, selectUsersAll, cookbookById
+from MySqlConnection import selectFirstTableAll, selectUsersAll, cookbookById, getAllCookbooks
 
 import json
 
@@ -22,6 +22,11 @@ def AllUsers():
 @app.route("/cookbook/<string:cookbookId>", methods=['GET'])
 def Cookbook(cookbookId):
     results = cookbookById(cookbookId)
+    return jsonify(results)
+
+@app.route("/cookbooks", methods=['GET'])
+def Cookbooks():
+    results = getAllCookbooks()
     return jsonify(results)
 
 @app.route("/firstTableAll", methods=['GET'])

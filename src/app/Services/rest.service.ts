@@ -34,4 +34,9 @@ export class RestService implements OnInit {
     return this.httpClient.get<Cookbook>(user2cookbookUrl);
   }
 
+  getCookBooks(): Observable<Cookbook[]> {
+    const allCookbooksUrl = `${this.apiUrlBase}/cookbooks`;
+    return this.httpClient.get<Cookbook[]>(allCookbooksUrl);
+  }
+
 }
