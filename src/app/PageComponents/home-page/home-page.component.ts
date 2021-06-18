@@ -14,7 +14,6 @@ export class HomePageComponent implements OnInit {
   }
 
   public onViewCookBooksClick(): void {
-    console.log('clicked to route to cookbooks');
     this.router.navigate(['/allcookbooks']);
   }
 

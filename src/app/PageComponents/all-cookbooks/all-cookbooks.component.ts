@@ -9,7 +9,8 @@ import { Cookbook } from 'src/app/Models/cookbook';
 })
 export class AllCookbooksComponent implements OnInit {
 
-  public cookbooks: Cookbook[];
+  protected cookbooks: Cookbook[] = [];
+  protected dataArr: any[];
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute) { 
@@ -17,9 +18,15 @@ export class AllCookbooksComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe((data: {cookbooks: any}) => {
-      this.cookbooks = data.cookbooks;
-      //console.log(JSON.stringify(this.cookbooks));
+    this.dataArr = this.activatedRoute.snapshot.data.cookbooks;
+    console.log(`cookbooks init! num found: ${this.dataArr.length}`);
+    this.dataArr.forEach((val) => { // TODO - see if its more straightforward to map results to objects
+      const book: Cookbook = {
+        id: val[0],
+        user_id: val[1],
+        cookbook_name: val[2]
+      };
+      this.cookbooks.push(book);
     });
   }
 
@@ -28,13 +35,11 @@ export class AllCookbooksComponent implements OnInit {
   }
   public get cookBookNamesList(): string[] {
     const strngCheck: string[] = [];
-    this.cookbooks.forEach(function(val){
-      console.log(val);
-      strngCheck.push(val.cookbook_name);
+    this.cookbooks.forEach((book) => {
+      strngCheck.push(book.cookbook_name);
     });
-    //console.log(strngCheck.length);
-    //strngCheck.forEach(s => console.log(s));
-    return this.cookbooks.map(b => b.cookbook_name);
+
+    return strngCheck;
   }
 
   public onViewHomeClick(): void {

@@ -7,7 +7,7 @@ import { RestService } from '../Services/rest.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AllCookbooksResolver implements Resolve<Cookbook[]> {
+export class AllCookbooksResolver implements Resolve<Observable<Cookbook[]>> {
 
   // public resolvedData: Cookbook[];
 
