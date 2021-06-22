@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cookbook } from 'src/app/Models/cookbook';
+import { RestService } from 'src/app/Services/rest.service';
 
 @Component({
   selector: 'app-all-cookbooks',
@@ -9,11 +10,14 @@ import { Cookbook } from 'src/app/Models/cookbook';
 })
 export class AllCookbooksComponent implements OnInit {
 
-  protected cookbooks: Cookbook[] = [];
+  public cookbooks: Cookbook[] = [];
   protected dataArr: any[];
 
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute) { 
+  public newCookBookName: string;
+
+  public constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private restService: RestService) { 
       
     }
 
@@ -33,20 +37,19 @@ export class AllCookbooksComponent implements OnInit {
   public get newCookbookPlaceholder(): string {
     return 'Enter new cookbook name';
   }
-  public get cookBookNamesList(): string[] {
-    const strngCheck: string[] = [];
-    this.cookbooks.forEach((book) => {
-      strngCheck.push(book.cookbook_name);
-    });
-
-    return strngCheck;
-  }
 
   public onViewHomeClick(): void {
     this.router.navigate(['home']);
   }
 
   public onAddNewCookbook(): void {
-    // TODO - make api call and pass info from textarea in
+    this.restService.addUser1Cookbook(this.newCookBookName).subscribe((response: any) => {
+      console.log(JSON.stringify(response));
+      this.newCookBookName = '';
+    });
+  }
+
+  public deleteCookBook(book: Cookbook): void {
+    console.log(JSON.stringify(book));
   }
 }

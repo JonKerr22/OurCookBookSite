@@ -1,18 +1,23 @@
 import mysql.connector
 from mysql.connector import Error
 from enum import Enum
+from Response import Response
 
-class SqlStoredProcedures(Enum):
+from flask import jsonify
+
+class SqlStoredProcs(Enum):
     firstTableAll = 1,
     usersAll = 2,
     cookBookById = 3,
-    cookbooksAll = 4
+    cookbooksAll = 4,
+    addCookBook = 5
 
 storedProcMap = {
-    SqlStoredProcedures.firstTableAll : 'getFirstTableAll',
-    SqlStoredProcedures.usersAll : 'getAllUsers',
-    SqlStoredProcedures.cookBookById : 'getCookBook',
-    SqlStoredProcedures.cookbooksAll: 'getAllCookBooks'
+    SqlStoredProcs.firstTableAll : 'getFirstTableAll',
+    SqlStoredProcs.usersAll : 'getAllUsers',
+    SqlStoredProcs.cookBookById : 'getCookBook',
+    SqlStoredProcs.cookbooksAll: 'getAllCookBooks',
+    SqlStoredProcs.addCookBook: 'addCookBook'
 }
 
 # TODO - there absolutely must be a more generic way to make these calls - probs with an enum
@@ -20,7 +25,7 @@ def selectFirstTableAll():
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.callproc(storedProcMap[SqlStoredProcedures.firstTableAll])
+        cursor.callproc(storedProcMap[SqlStoredProcs.firstTableAll])
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()
@@ -33,7 +38,7 @@ def selectUsersAll():
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.callproc(storedProcMap[SqlStoredProcedures.usersAll])
+        cursor.callproc(storedProcMap[SqlStoredProcs.usersAll])
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()
@@ -46,7 +51,7 @@ def cookbookById(id):
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.callproc(storedProcMap[SqlStoredProcedures.cookBookById], [id, ])
+        cursor.callproc(storedProcMap[SqlStoredProcs.cookBookById], [id, ])
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()
@@ -55,11 +60,24 @@ def cookbookById(id):
 
         return records 
 
+def addUser1Cookbook(name):
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcs.addCookBook], [1, name])
+        connection.commit()
+
+        resp = Response('User added successfully!', 200)
+
+        closeSqlConnection(connection)
+        return [resp.__dict__]
+
+
 def getAllCookbooks():
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.callproc(storedProcMap[SqlStoredProcedures.cookbooksAll])
+        cursor.callproc(storedProcMap[SqlStoredProcs.cookbooksAll])
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()

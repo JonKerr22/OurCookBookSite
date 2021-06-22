@@ -1,17 +1,19 @@
-<p>all-cookbooks works!</p>
 
 <!-- hey make this into a grid at some point, 
     2 col 1 to view cookbook list and 1 to make new one -->
 
 <div>
     <p>currentCookbooks:</p>
-    <div *ngFor="let name of cookBookNamesList">{{name}}</div>
+    <div *ngFor="let book of cookbooks">
+        {{book.cookbook_name}}
+        <button (click)='deleteCookBook(book)'>Delete</button>
+    </div>
     
 </div>
 <br />
 <div>
     for now all cookbooks are under user 1<br />
-    <textarea placeholder="{{newCookbookPlaceholder}}"></textarea>
+    <textarea [(ngModel)]="newCookBookName" placeholder="{{newCookbookPlaceholder}}"></textarea>
     <br />
     <button (click)='onAddNewCookbook()'>Add Cookbook</button>
 </div>
