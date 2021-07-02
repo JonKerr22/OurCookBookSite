@@ -5,7 +5,9 @@
 <div>
     <p>currentCookbooks:</p>
     <div *ngFor="let book of cookbooks">
-        {{book.cookbook_name}}
+        <input value="{{book.cookbook_name}}" [readonly]='!bookEditable(book)'>
+        <button (click)='editToggleCookBook(book)'>Edit Toggle</button>
+        <button (click)='updateCookbook(book)' [disabled]='!bookEditable(book)'>Update Name</button>
         <button (click)='deleteCookBook(book)'>Delete</button>
     </div>
     

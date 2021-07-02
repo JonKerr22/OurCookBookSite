@@ -48,4 +48,9 @@ export class RestService implements OnInit {
     return this.httpClient.post(addBookUrl, {cookbookName}, this.httpJsonOptions);
   }
 
+  public deleteCookbook(cookbookId: number): Observable<any> {
+    const url = `${this.apiUrlBase}/deleteCookbook`;
+    return this.httpClient.post(url, {cookbookId}, this.httpJsonOptions);
+  }
+
 }

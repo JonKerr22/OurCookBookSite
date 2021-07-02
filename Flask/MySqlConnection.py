@@ -10,14 +10,16 @@ class SqlStoredProcs(Enum):
     usersAll = 2,
     cookBookById = 3,
     cookbooksAll = 4,
-    addCookBook = 5
+    addCookBook = 5,
+    deleteCookbook = 6
 
 storedProcMap = {
     SqlStoredProcs.firstTableAll : 'getFirstTableAll',
     SqlStoredProcs.usersAll : 'getAllUsers',
     SqlStoredProcs.cookBookById : 'getCookBook',
     SqlStoredProcs.cookbooksAll: 'getAllCookBooks',
-    SqlStoredProcs.addCookBook: 'addCookBook'
+    SqlStoredProcs.addCookBook: 'addCookBook',
+    SqlStoredProcs.deleteCookbook: 'deleteCookbook'
 }
 
 # TODO - there absolutely must be a more generic way to make these calls - probs with an enum
@@ -65,9 +67,13 @@ def addUser1Cookbook(name):
     if connection.is_connected():
         cursor = connection.cursor()
         cursor.callproc(storedProcMap[SqlStoredProcs.addCookBook], [1, name])
-        connection.commit()
 
-        resp = Response('User added successfully!', 200)
+        connection.commit()
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
+
+        resp = Response((records[0] , 'User added successfully!'), 200)
 
         closeSqlConnection(connection)
         return [resp.__dict__]
@@ -85,7 +91,18 @@ def getAllCookbooks():
         closeSqlConnection(connection)
 
         return records 
-    
+
+def deleteCookbook(id):
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcs.deleteCookbook], [id])
+        connection.commit()
+
+        resp = Response('cookbook deleted successfully!', 200)
+
+        closeSqlConnection(connection)
+        return [resp.__dict__]
 
 def createSqlConnection():
     try:

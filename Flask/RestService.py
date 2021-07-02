@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 #todo convert to import everything in here
-from MySqlConnection import selectFirstTableAll, selectUsersAll, cookbookById, getAllCookbooks, addUser1Cookbook
+from MySqlConnection import *
 
 import json
 
@@ -45,6 +45,13 @@ def AddUser1Cookbook():
     except Exception as e:
         print('error print: ')
         print(e)
+
+@app.route("/deleteCookbook", methods=['POST'])
+def DeleteCookbook():
+    dataJson = request.json
+    cookbookId = dataJson['cookbookId']
+    resp = deleteCookbook(cookbookId)
+    return jsonify(resp)
 
 
 
