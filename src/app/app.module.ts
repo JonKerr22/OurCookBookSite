@@ -11,6 +11,8 @@ import { AllCookbooksComponent } from './PageComponents/all-cookbooks/all-cookbo
 import { ViewMyCookbookComponent } from './PageComponents/view-my-cookbook/view-my-cookbook.component';
 import { LoginComponent } from './PageComponents/login/login.component';
 import { ViewRecipeComponent } from './PageComponents/view-recipe/view-recipe.component';
+import { HeaderComponent } from './PageComponents/shared/header/header.component';
+import { FooterComponent } from './PageComponents/shared/footer/footer.component';
 
 @NgModule({
   declarations: [ // TODO - don't just have everything declared at the app level, split it up some
@@ -19,7 +21,9 @@ import { ViewRecipeComponent } from './PageComponents/view-recipe/view-recipe.co
     AllCookbooksComponent,
     ViewMyCookbookComponent,
     LoginComponent,
-    ViewRecipeComponent
+    ViewRecipeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
