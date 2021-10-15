@@ -5,6 +5,10 @@ a, a:hover, a:focus {
 }
 
 /* === Navbar === */
+.bottom-pad {
+	padding-bottom: 30px;
+}
+
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:focus {
 	color: #7FB2F0;
 }
@@ -152,16 +156,14 @@ a, a:hover, a:focus {
 /* Small Devices, Tablets */
 @media only screen and (max-width : 767px) {
 
-.navbar-collapse {
-		background-color: #7FB2F0;
-		border-color: #fff !important;
+	.navbar-collapse {
+			background-color: #7FB2F0;
+			border-color: #fff !important;
+		}
+	.navbar-default.navbar-shrink .navbar-nav > li.active > a {
+		box-shadow: none !important;
 	}
-.navbar-default.navbar-shrink .navbar-nav > li.active > a {
-	box-shadow: none !important;
-}
-.navbar-nav > li > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li.active > a {
-	color: #254378;
-}
-
-
+	.navbar-nav > li > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li.active > a {
+		color: #254378;
+	}
 }
