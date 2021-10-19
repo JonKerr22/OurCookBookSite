@@ -1,8 +1,5 @@
 /*  using the css from desktop example - maybe it needs to be in universal app css? unsure yet */
 
-a, a:hover, a:focus {
-	color: #7FB2F0;
-}
 
 /* === Navbar === */
 .bottom-pad {
@@ -114,36 +111,6 @@ a, a:hover, a:focus {
 .navbar-fixed-top.navbar-shrink .navbar-brand:hover {
 	color: #254378;
 }
-
-
-
-/* === Buttons === */
-.btn-default, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active { 
-	background: #4E7AC7;
-	color: #fff;
-}
-.btn-default:hover {
-	color: #fff;
-	background: #7FB2F0;
-}
-.btn-primary, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
-	background-color: #3078B3;
-	color: #FFF;
-}
-.btn-primary:hover {
-	background-color: #1867A8;
-	color: #FFF;
-}
-.btn-danger, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active {
-	background-color: #E7392D;
-	color: #FFF;
-}
-.btn-danger:hover {
-	background-color: #D81508;
-	color: #FFF;
-}
-
-
 
 /* === To Top === */
 .scrolltotop {

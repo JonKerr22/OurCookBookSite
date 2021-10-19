@@ -1,8 +1,66 @@
 <app-header></app-header>
 
-<section class="page bg-style1">
-    <div class="homepage-test">home-page works!</div>
-    <button (click)='onViewCookBooksClick()'>View CookBooks</button>
+<!-- TODO - padding from below header -->
+
+<!-- Begin about section -->
+<section id="about-section" class="page bg-style1">
+    <div class="page-header-wrapper">
+        <div class="container">
+            <div class="page-header text-center">
+                <h2>About</h2>
+                <div class="devider"></div>
+                <p class="subtitle">little information</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-boxes-wrapper">
+        <div class="container">
+            <div class="row about-facts-row">
+                <div class="col-md-6 col-sm-6">
+                    <i class="fa fa-users"></i>
+                    <div class="about-box-info">
+                        <h4>Who We Are?</h4>
+                        <p>Lorem ipsum dolor sit amet set, consectetur utes anet adipisicing elit, sed do eiusmod tempor incidist.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <i class="fa fa-diamond"></i>
+                    <div class="about-box-info">
+                        <h4>What We Do?</h4>
+                        <p>Lorem ipsum dolor sit amet set, consectetur utes anet adipisicing elit, sed do eiusmod tempor incidist.</p>
+                    </div>
+                </div>
+
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div><!-- /.info-box-wrapper -->
 </section>
+<!-- End about section -->
 
+<!-- Begin Signup section -->
+<section id="signup-section">
+    <div class="signup-wrapper">
+        <div class="container">
+            <div class="row">
+        
+                <div class="col-md-9 text-center">
+                    <h1>Create a cookbook today!</h1>
+                    <p>You can start writing and sharing recipes with an account</p>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="signup-btn" >
+                        <a class="btn btn-primary btn-lg" href="/sign-up" role="button">Create Account</a>
+                    </div>
+                </div>
+            
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+  </div>
+</section>
+<!-- End Signup -->
 
+<!-- TODO - remove this button eventually 
+<button (click)='onViewCookBooksClick()'>View CookBooks</button> -->

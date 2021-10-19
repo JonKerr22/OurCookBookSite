@@ -1,0 +1,13 @@
+/* possible to rename this to make color on homepage more universal? */
+.about-facts-row {
+    color: #4e7ac7
+}
+
+/* Begin sign-up section */
+#signup-section {
+	padding: 70px 0 80px;
+}
+.signup-btn {
+	margin-top: 30px;
+}
+/* End sign-up section */
