@@ -5,9 +5,18 @@
 
 /* Begin sign-up section */
 #signup-section {
+	background: #f8f8f8;
 	padding: 70px 0 80px;
 }
+#signup-section .signup-form .form-control:focus {
+	background-color: #dbdbdb;
+	box-shadow: none;
+}
+
 .signup-btn {
-	margin-top: 30px;
+	float: right;
+}
+.signup-btn:hover {
+	background-color: #dbdbdb;
 }
 /* End sign-up section */
