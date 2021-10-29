@@ -15,7 +15,7 @@ export class RestService implements OnInit {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  private apiUrlBase = environment.apiUrl ? environment.apiUrl : 'http://localhost:5000'; // for now default to localhost, no test or prod env
+  private apiUrlBase = environment.apiUrl ? environment.apiUrl : 'http://localhost:5001'; // for now default to localhost, no test or prod env
 
   constructor(private httpClient: HttpClient ) {
   }
@@ -33,11 +33,6 @@ export class RestService implements OnInit {
     return this.httpClient.get<FirstTableObj[]>(firstTableUrl);
   }
 
-  public getCookBook2(): Observable<Cookbook> {
-    const user2cookbookUrl = `${this.apiUrlBase}/cookbook/2`;
-    return this.httpClient.get<Cookbook>(user2cookbookUrl);
-  }
-
   public getCookBooks(): Observable<Cookbook[]> {
     const allCookbooksUrl = `${this.apiUrlBase}/cookbooks`;
     return this.httpClient.get<Cookbook[]>(allCookbooksUrl);
@@ -51,6 +46,18 @@ export class RestService implements OnInit {
   public deleteCookbook(cookbookId: number): Observable<any> {
     const url = `${this.apiUrlBase}/deleteCookbook`;
     return this.httpClient.post(url, {cookbookId}, this.httpJsonOptions);
+  }
+
+  public registerUser(username: string, password: string): Observable<any> {
+    console.log('doing register user api call');
+    const url = `${this.apiUrlBase}/registerUser`;
+    return this.httpClient.post(url, {username}, this.httpJsonOptions);
+  }
+
+  public nothingPost(): Observable<any> {
+    console.log('doing nothing api call');
+    const nothingUrl = `${this.apiUrlBase}/nothingPost`;
+    return this.httpClient.get(nothingUrl);
   }
 
 }

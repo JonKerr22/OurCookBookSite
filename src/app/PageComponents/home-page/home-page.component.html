@@ -60,15 +60,15 @@
                     <div class="signup-form"> <!-- TODO - this feels like a perfect teaching tool for angular forms -->
                         <form role="form">
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" placeholder="Username" required>
+                                <input type="text" class="form-control input-lg" placeholder="Username" [(ngModel)]='username' name='un' required>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control input-lg" placeholder="Password" required>
+                                <input type="password" class="form-control input-lg" placeholder="Password" [(ngModel)]='password' name="pw" required>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control input-lg" placeholder="Confirm Password" required>
+                                <input type="password" class="form-control input-lg" placeholder="Confirm Password" [(ngModel)]='confirmPassword' name="cnpw" required>
                             </div>
-                            <button type="submit" class="btn signup-btn">Create Account</button>
+                            <button type="submit" class="btn signup-btn" (click)='onSubmitSignup()'>Create Account</button>
                         </form>
                     </div>	
                 </div>

@@ -64,6 +64,7 @@ export class AllCookbooksComponent implements OnInit {
   }
 
   public onViewHomeClick(): void {
+    this.restService.nothingPost();
     this.router.navigate(['home']);
   }
 

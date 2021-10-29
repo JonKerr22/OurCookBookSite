@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from EncryptService import encryptPassword
 
 #todo convert to import everything in here
 from MySqlConnection import *
@@ -30,10 +31,6 @@ def Cookbooks():
     results = getAllCookbooks()
     return jsonify(results)
 
-@app.route("/firstTableAll", methods=['GET'])
-def FirstTableAll():
-    results = selectFirstTableAll()
-    return jsonify(results)
 
 @app.route("/addUser1Cookbook", methods=['POST'])
 def AddUser1Cookbook():
@@ -53,7 +50,27 @@ def DeleteCookbook():
     resp = deleteCookbook(cookbookId)
     return jsonify(resp)
 
+@app.route("/registerUser", methods=['POST'])
+def RegisterUser():
+    try:
+        print('got to resgisterUserPoint')
+        #dataJson = request.json
+        #username = dataJson['username']
+        #plaintextPassword = dataJson['password']
+        #encryptedPassword = encryptPassword('plaintextPassword')
+        #temp
+        #print(encryptedPassword)
+        #then send to db
+        return jsonify(True)
+    except Exception as e:
+        print('error print: ')
+        print(e)
+
+@app.route("/nothingPost", methods=['GET'])
+def NothingPost():
+    print('anything?')
+    return jsonify('nothing')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
