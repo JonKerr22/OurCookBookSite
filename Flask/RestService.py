@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from EncryptService import encryptPassword
+from EncryptService import *
 
 #todo convert to import everything in here
 from MySqlConnection import *
@@ -52,24 +52,16 @@ def DeleteCookbook():
 
 @app.route("/registerUser", methods=['POST'])
 def RegisterUser():
-    try:
-        print('got to resgisterUserPoint')
-        #dataJson = request.json
-        #username = dataJson['username']
-        #plaintextPassword = dataJson['password']
-        #encryptedPassword = encryptPassword('plaintextPassword')
-        #temp
-        #print(encryptedPassword)
-        #then send to db
-        return jsonify(True)
-    except Exception as e:
-        print('error print: ')
-        print(e)
+    dataJson = request.json
+    username = dataJson['username']
 
-@app.route("/nothingPost", methods=['GET'])
-def NothingPost():
-    print('anything?')
-    return jsonify('nothing')
+    plaintextPassword = dataJson['password']
+    encryptedPassword = encryptPassword(plaintextPassword)
+    encryptedPasswordAsStr = str(encryptedPassword, 'utf-8')
+
+    resp = addUser(username, encryptedPasswordAsStr)
+    return jsonify(resp)
+
 
 
 if __name__ == '__main__':

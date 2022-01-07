@@ -49,15 +49,8 @@ export class RestService implements OnInit {
   }
 
   public registerUser(username: string, password: string): Observable<any> {
-    console.log('doing register user api call');
-    const url = `${this.apiUrlBase}/registerUser`;
-    return this.httpClient.post(url, {username}, this.httpJsonOptions);
-  }
-
-  public nothingPost(): Observable<any> {
-    console.log('doing nothing api call');
-    const nothingUrl = `${this.apiUrlBase}/nothingPost`;
-    return this.httpClient.get(nothingUrl);
+    const registerUserUrl = `${this.apiUrlBase}/registerUser`;
+    return this.httpClient.post(registerUserUrl, {username, password}, this.httpJsonOptions);
   }
 
 }

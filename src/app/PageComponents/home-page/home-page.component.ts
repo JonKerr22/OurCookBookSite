@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 
 import { RestService } from 'src/app/Services/rest.service';
-import { compileInjectable } from '@angular/compiler';
 
 @Component({
   selector: 'app-home-page',
@@ -33,8 +32,10 @@ export class HomePageComponent implements OnInit {
       return;
     }
     console.log('valid login');
-    this.restService.nothingPost();
-    this.restService.registerUser(this.username, this.password);
+    const regUserResp = this.restService.registerUser(this.username, this.password);
+    regUserResp.subscribe(
+      x => console.log(`reg resp has values: ${JSON.stringify(x)}`)
+    );
     // TODO - should go somewhere after successful resgistration
   }
 

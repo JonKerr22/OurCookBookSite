@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   testing: false,
   evnName: "Local",
-  apiUrl: "http://localhost:5000"
+  apiUrl: "http://localhost:5001"
 };
 
 /*
