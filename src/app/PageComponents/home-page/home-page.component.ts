@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 
 import { RestService } from 'src/app/Services/rest.service';
+import { SignupFormValidation } from 'src/app/Enums/forms';
 
 @Component({
   selector: 'app-home-page',
@@ -25,8 +26,8 @@ export class HomePageComponent implements OnInit {
   }
 
   public onSubmitSignup(): void {
-    console.log(`form info: un:${this.username}\npw:${this.password}\ncnpw:${this.confirmPassword}`);
-    if(!this.isSignupValid()) {
+    const validation = this.isSignupValid();
+    if(validation !== SignupFormValidation.Valid) {
       // TODO - will need to do something on form to show invalid
       console.log('invalid login');
       return;
@@ -39,14 +40,15 @@ export class HomePageComponent implements OnInit {
     // TODO - should go somewhere after successful resgistration
   }
 
-  private isSignupValid(): boolean {
-    // TODO - i should have requirements on length for password
+  private isSignupValid(): SignupFormValidation {
     if (!this.username || !this.password || !this.confirmPassword) {
-      return false;
+      return SignupFormValidation.FormNotCompleted;
     } else if(this.password !== this.confirmPassword) {
-      return false;
+      return SignupFormValidation.PasswordsDontMatch;
+    } else if(this.password.length < 8) { // TODO - make sure inclues numbers and letters
+      return SignupFormValidation.PasswordInvalid;
     } else {
-      return true;
+      return SignupFormValidation.Valid;
     }
   }
 

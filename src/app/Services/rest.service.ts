@@ -53,4 +53,9 @@ export class RestService implements OnInit {
     return this.httpClient.post(registerUserUrl, {username, password}, this.httpJsonOptions);
   }
 
+  public confirmLogin(username: string, password: string): Observable<any> {
+    const registerUserUrl = `${this.apiUrlBase}/confirmLogin`;
+    return this.httpClient.post(registerUserUrl, {username, password}, this.httpJsonOptions);
+  }
+
 }
