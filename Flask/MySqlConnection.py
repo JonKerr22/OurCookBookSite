@@ -12,7 +12,8 @@ class SqlStoredProcs(Enum):
     cookbooksAll = 4,
     addCookBook = 5,
     deleteCookbook = 6,
-    addUser = 7
+    addUser = 7,
+    getUserByUsername = 8
 
 storedProcMap = {
     SqlStoredProcs.firstTableAll : 'getFirstTableAll',
@@ -21,7 +22,8 @@ storedProcMap = {
     SqlStoredProcs.cookbooksAll: 'getAllCookBooks',
     SqlStoredProcs.addCookBook: 'addCookBook',
     SqlStoredProcs.deleteCookbook: 'deleteCookbook',
-    SqlStoredProcs.addUser: 'addUser'
+    SqlStoredProcs.addUser: 'addUser',
+    SqlStoredProcs.getUserByUsername: 'getUserByUsername'
 }
 
 # TODO - there absolutely must be a more generic way to make these calls - probs with an enum
@@ -120,7 +122,20 @@ def addUser(fullName, password):
         resp = Response((records[0] , 'User added successfully!'), 200)
 
         closeSqlConnection(connection)
-        return [resp.__dict__]        
+        return [resp.__dict__]
+    
+def getUserByUsername(username):
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcs.getUserByUsername], [username])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
+
+        closeSqlConnection(connection)
+
+        return records         
 
 def createSqlConnection():
     try:

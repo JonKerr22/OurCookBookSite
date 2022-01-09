@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     loginResp.subscribe(
       x => console.log(`login resp has values: ${JSON.stringify(x)}`)
     );
-    // TODO - should go somewhere after successful resgistration
+    // TODO - should go somewhere after successful login
   }
 
 }

@@ -54,13 +54,26 @@ def DeleteCookbook():
 def RegisterUser():
     dataJson = request.json
     username = dataJson['username']
-
     plaintextPassword = dataJson['password']
     encryptedPassword = encryptPassword(plaintextPassword)
     encryptedPasswordAsStr = str(encryptedPassword, 'utf-8')
 
     resp = addUser(username, encryptedPasswordAsStr)
     return jsonify(resp)
+
+@app.route("/confirmLogin", methods=['POST'])
+def ConfirmLogin():
+    dataJson = request.json
+    username = dataJson['username']
+    plaintextPassword = dataJson['password']
+
+    userRecord = getUserByUsername(username)
+    if(len(userRecord) != 1):
+        return jsonify(False)
+    storedPass = userRecord[0][1]
+
+    verify = verifyPassword(plaintextPassword, storedPass)
+    return jsonify(verify)
 
 
 
