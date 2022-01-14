@@ -41,6 +41,7 @@ export class HomePageComponent implements OnInit {
   }
 
   private isSignupValid(): SignupFormValidation {
+    // TODO - check if username already exists
     if (!this.username || !this.password || !this.confirmPassword) {
       return SignupFormValidation.FormNotCompleted;
     } else if(this.password !== this.confirmPassword) {

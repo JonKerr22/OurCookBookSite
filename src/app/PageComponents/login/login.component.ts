@@ -24,9 +24,8 @@ export class LoginComponent implements OnInit {
       return;
     }
     const loginResp =  this.restService.confirmLogin(this.username, this.password);
-    let loginSuccess: boolean = false;
     loginResp.subscribe((x) => {
-      loginSuccess = x;
+      let loginSuccess: boolean = x;
 
       if(!loginSuccess) {
         console.log('failed login'); // TODO - alert or form indicated
