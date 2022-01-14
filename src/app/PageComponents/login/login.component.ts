@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/Services/rest.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,22 +12,28 @@ export class LoginComponent implements OnInit {
   public username: string = '';
   public password: string = '';
 
-  constructor(private restService: RestService) { }
+  constructor(private restService: RestService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  public onLogin(): void {
-    console.log('login btn go');
+  public onLogin(): Promise<void> {
     if(!this.username || !this.password){
-      console.log('form incomplete');
+      console.log('form incomplete'); // TODO - alert or form indicated
       return;
     }
-    const loginResp = this.restService.confirmLogin(this.username, this.password);
-    loginResp.subscribe(
-      x => console.log(`login resp has values: ${JSON.stringify(x)}`)
-    );
-    // TODO - should go somewhere after successful login
+    const loginResp =  this.restService.confirmLogin(this.username, this.password);
+    let loginSuccess: boolean = false;
+    loginResp.subscribe((x) => {
+      loginSuccess = x;
+
+      if(!loginSuccess) {
+        console.log('failed login'); // TODO - alert or form indicated
+        return ;
+      }
+      this.router.navigate(["view-my-cookbook"]);
+    });
   }
 
 }
