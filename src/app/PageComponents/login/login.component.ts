@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from 'src/app/Services/rest.service';
 import { Router } from '@angular/router';
+
+import { RestService } from 'src/app/Services/rest.service';
+import { LoginConfirmationResponse } from 'src/app/Responses/login-confirmation-response';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +16,7 @@ export class LoginComponent implements OnInit {
   public password: string = '';
 
   constructor(private restService: RestService,
+              private authService: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -25,13 +29,14 @@ export class LoginComponent implements OnInit {
     }
     const loginResp =  this.restService.confirmLogin(this.username, this.password);
     loginResp.subscribe((x) => {
-      let loginSuccess: boolean = x;
+      let loginSuccess: LoginConfirmationResponse = new LoginConfirmationResponse(x);
 
-      if(!loginSuccess) {
+      if(!loginSuccess.valid) {
         console.log('failed login'); // TODO - alert or form indicated
         return ;
       }
-      this.router.navigate(["view-my-cookbook"]);
+      this.authService.setLogin(loginSuccess.userInfo.session_key);
+      this.router.navigate(["view-my-cookbook"]); // TODO -  anything on this side to check on what params the resolver needs?
     });
   }
 

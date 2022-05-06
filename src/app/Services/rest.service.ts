@@ -5,7 +5,7 @@ import { User } from '../Models/user';
 import { FirstTableObj } from '../Models/firstTableObj';
 import { Cookbook } from '../Models/cookbook';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

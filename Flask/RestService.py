@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import uuid
+
 from EncryptService import *
 
 #todo convert to import everything in here
@@ -57,8 +59,9 @@ def RegisterUser():
     plaintextPassword = dataJson['password']
     encryptedPassword = encryptPassword(plaintextPassword)
     encryptedPasswordAsStr = str(encryptedPassword, 'utf-8')
+    sessionKeyString = str(uuid.uuid4())
 
-    resp = addUser(username, encryptedPasswordAsStr)
+    resp = addUser(username, encryptedPasswordAsStr, sessionKeyString)
     return jsonify(resp)
 
 @app.route("/confirmLogin", methods=['POST'])
@@ -70,10 +73,10 @@ def ConfirmLogin():
     userRecord = getUserByUsername(username)
     if(len(userRecord) != 1):
         return jsonify(False)
-    storedPass = userRecord[0][1]
+    storedPass = userRecord[0][2] #todo - there has to be better way to parse thru response than knowing the indices
 
-    verify = verifyPassword(plaintextPassword, storedPass)
-    return jsonify(verify)
+    valid = verifyPassword(plaintextPassword, storedPass)
+    return jsonify([userRecord[0], valid])
 
 
 

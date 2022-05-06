@@ -108,11 +108,11 @@ def deleteCookbook(id):
         closeSqlConnection(connection)
         return [resp.__dict__]
 
-def addUser(fullName, password):
+def addUser(fullName, password, sessionKey):
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.callproc(storedProcMap[SqlStoredProcs.addUser], [fullName, password])
+        cursor.callproc(storedProcMap[SqlStoredProcs.addUser], [fullName, password, sessionKey])
 
         connection.commit()
         records = []
