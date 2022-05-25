@@ -58,4 +58,9 @@ export class RestService implements OnInit {
     return this.httpClient.post(registerUserUrl, {username, password}, this.httpJsonOptions);
   }
 
+  public checkUserSessionKey(sessionKey: string): Observable<any> {
+    const registerUserUrl = `${this.apiUrlBase}/checkUserSessionKey`;
+    return this.httpClient.post(registerUserUrl, {sessionKey}, this.httpJsonOptions);
+  }
+
 }

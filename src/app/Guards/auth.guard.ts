@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) { }   
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.isLoggedIn) {
+    if(this.isLoggedIn()) {
       return true;
     }
     this.router.navigate(['/login']);
@@ -17,14 +17,10 @@ export class AuthGuard implements CanActivate {
   }
   
 
-  public isLoggedIn(): boolean {      
-    let status = false;      
-    if (localStorage.getItem('isLoggedIn') == "true") {      
-       status = true;      
-    }
-    else {      
-      status = false;      
-    }      
-    return status;      
+  public isLoggedIn(): boolean {     
+    if (localStorage.getItem('isLoggedIn') == "true") {  
+      return true;      
+    }     
+    return false;      
   }    
 }

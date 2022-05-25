@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   public onLogin(): Promise<void> {
     if(!this.username || !this.password){
-      console.log('form incomplete'); // TODO - alert or form indicated
+      alert('Please enter both username and password'); // TODO - better alert
       return;
     }
     const loginResp =  this.restService.confirmLogin(this.username, this.password);
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       let loginSuccess: LoginConfirmationResponse = new LoginConfirmationResponse(x);
 
       if(!loginSuccess.valid) {
-        console.log('failed login'); // TODO - alert or form indicated
+        alert('Invalid username or password'); // TODO - better alert
         return ;
       }
       this.authService.setLogin(loginSuccess.userInfo.session_key);

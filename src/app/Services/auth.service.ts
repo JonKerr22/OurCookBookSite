@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   //this function assumes the login has been validated already
   setLogin(userKey: string) : void {
@@ -15,6 +16,7 @@ export class AuthService {
 
   logout() : void {    
     localStorage.setItem('isLoggedIn','false');    
-    localStorage.removeItem('key');    
+    localStorage.removeItem('key');
+    this.router.navigate(["/"]);
   }
 }

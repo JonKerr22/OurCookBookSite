@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UserSessionkeyResolverService } from '../../Resolvers/user-sessionkey-resolver.service';
+
 @Component({
   selector: 'app-view-my-cookbook',
   templateUrl: './view-my-cookbook.component.html',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewMyCookbookComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userSessionkeyResolver : UserSessionkeyResolverService) { }
 
   ngOnInit(): void {
   }
+
+  public get usersName(): string {
+    return this.userSessionkeyResolver.userInfo ? this.userSessionkeyResolver.userInfo.full_name : 'invalid user';
+  }
+  
 
 }

@@ -72,11 +72,23 @@ def ConfirmLogin():
 
     userRecord = getUserByUsername(username)
     if(len(userRecord) != 1):
-        return jsonify(False)
+        return jsonify([None , False])
     storedPass = userRecord[0][2] #todo - there has to be better way to parse thru response than knowing the indices
 
     valid = verifyPassword(plaintextPassword, storedPass)
+
     return jsonify([userRecord[0], valid])
+
+@app.route("/checkUserSessionKey", methods=['POST'])
+def CheckUserSessionKey():
+    dataJson = request.json
+    sessionKey = dataJson['sessionKey']
+
+    userRecord = getUserBysessionKey(sessionKey)
+    if(len(userRecord) != 1):
+        return jsonify([None])
+
+    return jsonify([userRecord[0]])
 
 
 

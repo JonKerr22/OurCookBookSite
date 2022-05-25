@@ -8,6 +8,7 @@ import { MyCookbookResolverService } from './Resolvers/my-cookbook-resolver.serv
 import { LoginComponent } from './PageComponents/login/login.component';
 import { ViewMyCookbookComponent } from './PageComponents/view-my-cookbook/view-my-cookbook.component';
 import { AuthGuard } from './Guards/auth.guard';
+import { UserSessionkeyResolverService } from './Resolvers/user-sessionkey-resolver.service';
 
 
 const routes: Routes = [
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'index', redirectTo: '', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
                                                           //TODO - implement resolver here
-  { path: 'view-my-cookbook', component: ViewMyCookbookComponent, /*resolve: {cookbook: MyCookbookResolverService},*/ canActivate : [AuthGuard]},
+  { path: 'view-my-cookbook', component: ViewMyCookbookComponent,
+                            canActivate : [AuthGuard], 
+                            resolve: {userInfo: UserSessionkeyResolverService /*, {cookbook: MyCookbookResolverService}*/}},
   { path: 'allcookbooks', component: AllCookbooksComponent, resolve: {cookbooks: AllCookbooksResolver}, canActivate : [AuthGuard]}
 ];
 
