@@ -15,7 +15,7 @@ export class ViewMyCookbookComponent implements OnInit {
   }
 
   public get usersName(): string {
-    return this.userSessionkeyResolver.userInfo ? this.userSessionkeyResolver.userInfo.full_name : 'invalid user';
+    return this.userSessionkeyResolver.userInfo ? this.userSessionkeyResolver.userInfo.full_name : '';
   }
   
 

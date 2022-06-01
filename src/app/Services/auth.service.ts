@@ -14,6 +14,10 @@ export class AuthService {
     localStorage.setItem('key', userKey);    
   }
 
+  isUserLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true' ?? false;
+  }
+
   logout() : void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('key');
