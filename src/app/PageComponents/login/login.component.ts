@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     }
     const loginResp =  this.restService.confirmLogin(this.username, this.password);
     loginResp.subscribe((x) => {
-      let loginSuccess: LoginConfirmationResponse = new LoginConfirmationResponse(x);
+      const loginSuccess: LoginConfirmationResponse = new LoginConfirmationResponse(x);
 
       if(!loginSuccess.valid) {
         alert('Invalid username or password'); // TODO - better alert
