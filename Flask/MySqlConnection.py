@@ -124,7 +124,7 @@ def addUser(fullName, password, sessionKey):
         resp = Response((records[0] , 'User added successfully!'), 200)
 
         closeSqlConnection(connection)
-        return [resp.__dict__]
+        return [resp]
     
 def getUserByUsername(username):
     connection = createSqlConnection()

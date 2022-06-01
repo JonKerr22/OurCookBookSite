@@ -3,6 +3,8 @@ import { Router } from '@angular/router'
 
 import { RestService } from 'src/app/Services/rest.service';
 import { SignupFormValidation } from 'src/app/Enums/forms';
+import { AuthService } from 'src/app/Services/auth.service';
+import { RegisterUserResponse } from 'src/app/Responses/register-user-response';
 
 @Component({
   selector: 'app-home-page',
@@ -16,7 +18,8 @@ export class HomePageComponent implements OnInit {
   public confirmPassword: string = '';
 
   constructor(private router: Router,
-              private restService: RestService) { }
+              private restService: RestService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -28,16 +31,19 @@ export class HomePageComponent implements OnInit {
   public onSubmitSignup(): void {
     const validation = this.isSignupValid();
     if(validation !== SignupFormValidation.Valid) {
-      // TODO - will need to do something on form to show invalid
-      console.log('invalid login');
+      // TODO - better alerts
+      alert('invalid username and password, password must be 8 characters long');
       return;
     }
-    console.log('valid login');
+
     const regUserResp = this.restService.registerUser(this.username, this.password);
-    regUserResp.subscribe(
-      x => console.log(`reg resp has values: ${JSON.stringify(x)}`)
-    );
-    // TODO - should go somewhere after successful resgistration
+    regUserResp.subscribe((x) => {
+      const registerResp = new RegisterUserResponse(x);
+      if(registerResp.valid){
+        this.authService.setLogin(registerResp.sessionKey);
+        this.router.navigate(["view-my-cookbook"]);
+      }
+    });
   }
 
   private isSignupValid(): SignupFormValidation {
