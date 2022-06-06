@@ -34,12 +34,13 @@ def Cookbooks():
     return jsonify(results)
 
 
-@app.route("/addUser1Cookbook", methods=['POST'])
-def AddUser1Cookbook():
+@app.route("/addCookbook", methods=['POST'])
+def AddCookbook():
     try:
         dataJson = request.json
         cookbookName = dataJson['cookbookName']
-        resp = addUser1Cookbook(cookbookName)
+        userId = dataJson['userId']
+        resp = addCookbook(userId, cookbookName)
         return jsonify(resp)
     except Exception as e:
         print('error print: ')

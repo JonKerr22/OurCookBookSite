@@ -68,21 +68,21 @@ def cookbookById(id):
 
         return records 
 
-def addUser1Cookbook(name):
+def addCookbook(userId, name):
     connection = createSqlConnection()
     if connection.is_connected():
         cursor = connection.cursor()
-        cursor.callproc(storedProcMap[SqlStoredProcs.addCookBook], [1, name])
+        cursor.callproc(storedProcMap[SqlStoredProcs.addCookBook], [userId, name])
 
         connection.commit()
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()
 
-        resp = Response((records[0] , 'User added successfully!'), 200)
+        resp = Response((records[0] , 'Cookbook added successfully!'), 200)
 
         closeSqlConnection(connection)
-        return [resp.__dict__]
+        return [resp]
 
 
 def getAllCookbooks():
