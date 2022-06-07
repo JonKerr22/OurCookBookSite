@@ -8,7 +8,6 @@ import { RestService } from './Services/rest.service';
 import { AuthService } from './Services/auth.service';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './PageComponents/home-page/home-page.component';
-import { AllCookbooksComponent } from './PageComponents/all-cookbooks/all-cookbooks.component';
 import { ViewMyCookbookComponent } from './PageComponents/view-my-cookbook/view-my-cookbook.component';
 import { LoginComponent } from './PageComponents/login/login.component';
 import { ViewRecipeComponent } from './PageComponents/view-recipe/view-recipe.component';
@@ -20,7 +19,6 @@ import { AuthGuard } from './Guards/auth.guard'
   declarations: [ // TODO - don't just have everything declared at the app level, split it up some
     AppComponent,
     HomePageComponent,
-    AllCookbooksComponent,
     ViewMyCookbookComponent,
     LoginComponent,
     ViewRecipeComponent,
