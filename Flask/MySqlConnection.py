@@ -1,34 +1,11 @@
 import mysql.connector
 from mysql.connector import Error
-from enum import Enum
 from Response import Response
+from StoredProcs import storedProcMap, SqlStoredProcs
 
 from flask import jsonify
 
-class SqlStoredProcs(Enum):
-    firstTableAll = 1,
-    usersAll = 2,
-    cookBookById = 3,
-    cookbooksAll = 4,
-    addCookBook = 5,
-    deleteCookbook = 6,
-    addUser = 7,
-    getUserByUsername = 8,
-    getUserBySessionKey = 9
 
-storedProcMap = {
-    SqlStoredProcs.firstTableAll : 'getFirstTableAll',
-    SqlStoredProcs.usersAll : 'getAllUsers',
-    SqlStoredProcs.cookBookById : 'getCookBook',
-    SqlStoredProcs.cookbooksAll: 'getAllCookBooks',
-    SqlStoredProcs.addCookBook: 'addCookBook',
-    SqlStoredProcs.deleteCookbook: 'deleteCookbook',
-    SqlStoredProcs.addUser: 'addUser',
-    SqlStoredProcs.getUserByUsername: 'getUserByUsername',
-    SqlStoredProcs.getUserBySessionKey: 'getUserBySessionKey'
-}
-
-# TODO - there absolutely must be a more generic way to make these calls - probs with an enum
 def selectFirstTableAll():
     connection = createSqlConnection()
     if connection.is_connected():
@@ -60,6 +37,19 @@ def cookbookById(id):
     if connection.is_connected():
         cursor = connection.cursor()
         cursor.callproc(storedProcMap[SqlStoredProcs.cookBookById], [id, ])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
+
+        closeSqlConnection(connection)
+
+        return records
+
+def getUserCookbook(userId):
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcs.getUserCookbook], [userId ])
         records = []
         for result in cursor.stored_results():
             records += result.fetchall()

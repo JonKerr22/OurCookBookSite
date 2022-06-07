@@ -41,10 +41,23 @@ def AddCookbook():
         cookbookName = dataJson['cookbookName']
         userId = dataJson['userId']
         resp = addCookbook(userId, cookbookName)
+        if(resp[0].status_code == 200): #TODO - this status code check is definitely not the way to go, response object is maybe unneeded
+            return jsonify([True])
         return jsonify(resp)
     except Exception as e:
         print('error print: ')
         print(e)
+
+@app.route("/getUserCookbook", methods=['POST'])
+def GetUserCookbook():
+    dataJson = request.json
+    userId = dataJson['userId']
+    resp = getUserCookbook(userId)
+
+    if(len(resp) < 1):
+        return jsonify([None])
+    return jsonify(resp)
+
 
 @app.route("/deleteCookbook", methods=['POST'])
 def DeleteCookbook():

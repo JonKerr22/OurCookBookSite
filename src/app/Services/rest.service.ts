@@ -38,9 +38,9 @@ export class RestService implements OnInit {
     return this.httpClient.get<Cookbook[]>(allCookbooksUrl);
   }
 
-  public addUser1Cookbook(cookbookName: string): Observable<any> {
-    const addBookUrl = `${this.apiUrlBase}/addUser1Cookbook`;
-    return this.httpClient.post(addBookUrl, {cookbookName}, this.httpJsonOptions);
+  public addCookbook(cookbookName: string, userId: number): Observable<any> {
+    const addBookUrl = `${this.apiUrlBase}/addCookbook`;
+    return this.httpClient.post(addBookUrl, {cookbookName, userId}, this.httpJsonOptions);
   }
 
   public deleteCookbook(cookbookId: number): Observable<any> {
@@ -61,6 +61,11 @@ export class RestService implements OnInit {
   public checkUserSessionKey(sessionKey: string): Observable<any> {
     const registerUserUrl = `${this.apiUrlBase}/checkUserSessionKey`;
     return this.httpClient.post(registerUserUrl, {sessionKey}, this.httpJsonOptions);
+  }
+
+  public getUserCookbook(userId: number): Observable<any> {
+    const registerUserUrl = `${this.apiUrlBase}/getUserCookbook`;
+    return this.httpClient.post(registerUserUrl, {userId}, this.httpJsonOptions);
   }
 
 }

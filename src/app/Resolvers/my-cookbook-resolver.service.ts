@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Cookbook } from '../Models/cookbook';
 import { RestService } from '../Services/rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MyCookbookResolverService  implements Resolve<Observable<Cookbook>> {
+export class MyCookbookResolverService  implements Resolve<any> {
 
   constructor(private restService: RestService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Cookbook> | Observable<Observable<Cookbook>> | Promise<Observable<Cookbook>> {
-    throw new Error("Method not implemented."); // TODO build rest service calls to make this work
+  public cookbookInfo: Cookbook | undefined;
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | Observable<any> | Promise<any> {
+    const userId: number = +route.paramMap.get('userId');
+    this.restService.getUserCookbook(userId).subscribe((pythonResp: Array<any>) => {
+
+      if(pythonResp.length > 0 && !pythonResp[0]) { //empty response
+        this.cookbookInfo = null;
+        return of(false);
+      }
+      
+      const userCookbook = new Cookbook(pythonResp[0]);
+      this.cookbookInfo = userCookbook;
+      return of(true);
+    });
   }
 }

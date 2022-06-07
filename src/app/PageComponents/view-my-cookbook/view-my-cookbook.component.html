@@ -1,5 +1,32 @@
 <app-header [displayHomepageHeaderOptions]='false' [username]='usersName'></app-header>
 
+<div *ngIf='!hasCookbook' class="create-cookbook-sctn container">
+    <div class="row">
+        <div class="col-md-9 text-left">
+            <h4>You don't have a cookbook yet!</h4>
+            <h5>Make one with just a name for it!</h5>
+            <form role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control input-lg" placeholder="Name" [(ngModel)]='newCookBookName' name="name" required>
+                </div>
+                <button type="submit" class="btn create-btn" (click)='onCreateCookbook()'>Create</button>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <!--something should go here too-->
+        </div>
+    </div> <!-- /.row -->
+</div> <!-- container -->
 
-<p>view-my-cookbook works!</p>
 
+<div *ngIf='hasCookbook' class="create-cookbook-sctn container">
+    <div class="row">
+        <div class="col-md-9 text-left">
+            <h4>{{usersName}} Cookbook: {{cookbookName}}</h4>
+            <p>this will become a list of view recipe links at some point</p>
+        </div>
+        <div class="col-md-3">
+            <!--something should go here too-->
+        </div>
+    </div> <!-- /.row -->
+</div> <!-- container -->
