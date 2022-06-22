@@ -22,6 +22,7 @@ export class HomePageComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.logout(false); //unsure if temp solution or not
   }
 
   public onViewCookBooksClick(): void {

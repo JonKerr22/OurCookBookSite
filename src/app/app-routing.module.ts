@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'index', redirectTo: '', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
-                                                          //TODO - implement resolver here
   { path: 'view-my-cookbook/:userId', component: ViewMyCookbookComponent,
                             canActivate : [AuthGuard], 
                             resolve: { userInfo: UserSessionkeyResolverService,

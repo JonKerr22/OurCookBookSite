@@ -1,0 +1,14 @@
+
+<div *ngIf='hasRecipes'>
+    <p>Here are your current recipes:</p>
+    <p *ngFor="let r of recipes; let i = index">
+        {{r.name}}
+    </p>
+
+</div>
+<div *ngIf='!hasRecipes'> 
+    <p>You havent had any recipes added to your cookbook yet</p>
+
+</div>
+
+<button>This button will be to add another cookbook</button>

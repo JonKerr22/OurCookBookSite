@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.logout(false); //unsure if temp solution or not
   }
 
   public onLogin(): Promise<void> {

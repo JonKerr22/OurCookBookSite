@@ -13,7 +13,8 @@ import { LoginComponent } from './PageComponents/login/login.component';
 import { ViewRecipeComponent } from './PageComponents/view-recipe/view-recipe.component';
 import { HeaderComponent } from './PageComponents/shared/header/header.component';
 import { FooterComponent } from './PageComponents/shared/footer/footer.component';
-import { AuthGuard } from './Guards/auth.guard'
+import { AuthGuard } from './Guards/auth.guard';
+import { ViewMyCookbookRecipesComponent } from './PageComponents/view-my-cookbook/view-my-cookbook-recipes/view-my-cookbook-recipes.component'
 
 @NgModule({
   declarations: [ // TODO - don't just have everything declared at the app level, split it up some
@@ -23,7 +24,8 @@ import { AuthGuard } from './Guards/auth.guard'
     LoginComponent,
     ViewRecipeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ViewMyCookbookRecipesComponent
   ],
   imports: [
     BrowserModule,

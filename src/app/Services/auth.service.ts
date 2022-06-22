@@ -18,9 +18,11 @@ export class AuthService {
     return localStorage.getItem('isLoggedIn') === 'true' ?? false;
   }
 
-  logout() : void {    
+  logout(routeToHomePage: boolean = true) : void {    
     localStorage.setItem('isLoggedIn','false');    
     localStorage.removeItem('key');
-    this.router.navigate(["/"]);
+    if(routeToHomePage) {
+      this.router.navigate(["/"]);  
+    }
   }
 }
