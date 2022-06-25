@@ -1,0 +1,41 @@
+<app-header [displayHomepageHeaderOptions]='false' [username]='usersName'></app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4 text-left">
+            <input type="text" class="input-lg" placeholder="Recipe Name" [(ngModel)]='recipeName'>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-6 text-left"> <!-- TODO - this input will need to auto format with bullets -->
+            <textarea rows="5" placeholder="Ingredients..." [(ngModel)]="ingredientText"></textarea>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-6 text-left"> <!-- TODO - this input will need to auto format with numbers -->
+            <textarea rows="5" placeholder="Directions..." [(ngModel)]="directionsText"></textarea>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+    <div class="row">
+        <button type="button" class="btn" (click)='onAddRecipe()'>Add</button>
+    </div>
+</div>

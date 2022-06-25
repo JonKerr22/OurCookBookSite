@@ -14,7 +14,8 @@ import { ViewRecipeComponent } from './PageComponents/view-recipe/view-recipe.co
 import { HeaderComponent } from './PageComponents/shared/header/header.component';
 import { FooterComponent } from './PageComponents/shared/footer/footer.component';
 import { AuthGuard } from './Guards/auth.guard';
-import { ViewMyCookbookRecipesComponent } from './PageComponents/view-my-cookbook/view-my-cookbook-recipes/view-my-cookbook-recipes.component'
+import { ViewMyCookbookRecipesComponent } from './PageComponents/view-my-cookbook/view-my-cookbook-recipes/view-my-cookbook-recipes.component';
+import { AddNewRecipeComponent } from './PageComponents/add-new-recipe/add-new-recipe.component';
 
 @NgModule({
   declarations: [ // TODO - don't just have everything declared at the app level, split it up some
@@ -25,7 +26,8 @@ import { ViewMyCookbookRecipesComponent } from './PageComponents/view-my-cookboo
     ViewRecipeComponent,
     HeaderComponent,
     FooterComponent,
-    ViewMyCookbookRecipesComponent
+    ViewMyCookbookRecipesComponent,
+    AddNewRecipeComponent
   ],
   imports: [
     BrowserModule,
