@@ -7,6 +7,7 @@ import { LoginComponent } from './PageComponents/login/login.component';
 import { ViewMyCookbookComponent } from './PageComponents/view-my-cookbook/view-my-cookbook.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { UserSessionkeyResolverService } from './Resolvers/user-sessionkey-resolver.service';
+import { AddNewRecipeComponent } from './PageComponents/add-new-recipe/add-new-recipe.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
                             canActivate : [AuthGuard], 
                             resolve: { userInfo: UserSessionkeyResolverService,
                                        cookbook: MyCookbookResolverService }
+  },
+  { path: 'add-recipe', component: AddNewRecipeComponent,
+                            canActivate : [AuthGuard], 
+                            resolve: { userInfo: UserSessionkeyResolverService }
   }
 ];
 

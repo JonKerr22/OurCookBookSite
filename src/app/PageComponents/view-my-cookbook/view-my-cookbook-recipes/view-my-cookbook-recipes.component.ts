@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Recipe } from '../../../Models/recipe';
 
@@ -10,13 +11,19 @@ import { Recipe } from '../../../Models/recipe';
 export class ViewMyCookbookRecipesComponent implements OnInit {
   @Input() recipes: Recipe[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   public get hasRecipes(): boolean {
     return this.recipes.length > 0;
+  }
+
+
+  public onAddNewRecipe(): void {
+    this.router.navigate(["add-recipe"] ); 
+
   }
 
 }

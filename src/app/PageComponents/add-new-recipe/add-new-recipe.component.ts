@@ -26,11 +26,8 @@ export class AddNewRecipeComponent implements OnInit { // TODO - make sure the r
   public get usersName(): string {
     return this.userInfo ? this.userInfo.full_name : '';
   }
-  public get userId(): number {
-    return this.userInfo.id ?? -1;
-  }
 
   public onAddRecipe(): void {
-
+    console.log(`new name: ${this.recipeName}, ingre: ${this.ingredientText}, dire: ${this.directionsText}`);
   }
 }
