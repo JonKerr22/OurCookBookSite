@@ -4,7 +4,6 @@ import uuid
 
 from EncryptService import *
 
-#todo convert to import everything in here
 from MySqlConnection import *
 
 import json
@@ -105,6 +104,29 @@ def CheckUserSessionKey():
         return jsonify([None])
 
     return jsonify([userRecord[0]])
+
+@app.route("/addNewRecipe", methods=['POST'])
+def AddNewRecipe():
+    dataJson = request.json
+    cookbookId = dataJson['cookbookId']
+    userId = dataJson['userId']
+    name = dataJson['name']
+    directions = dataJson['directions']
+    ingredients = dataJson['ingredients']
+
+    resp = addRecipe(cookbookId, userId, name, directions, ingredients)
+    if(resp.status_code == 200): #TODO - this status code check is definitely not the way to go, response object is maybe unneeded
+        return jsonify([True, resp.msg[0][0]]) #0,0 idx is the newly created recipe's ID
+
+@app.route("/getRecipe", methods=['POST'])
+def GetRecipe():
+    dataJson = request.json
+    recipeId = dataJson['recipeId']
+    resp = getRecipe(recipeId)
+
+    if(len(resp) < 1):
+        return jsonify([None])
+    return jsonify(resp)
 
 
 

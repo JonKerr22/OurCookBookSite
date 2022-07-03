@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Recipe } from '../../../Models/recipe';
+import { Cookbook } from 'src/app/Models/cookbook';
 
 @Component({
   selector: 'app-view-my-cookbook-recipes',
@@ -10,6 +11,7 @@ import { Recipe } from '../../../Models/recipe';
 })
 export class ViewMyCookbookRecipesComponent implements OnInit {
   @Input() recipes: Recipe[] = [];
+  @Input() cookbook: Cookbook;
 
   constructor(private router: Router) { }
 
@@ -22,7 +24,7 @@ export class ViewMyCookbookRecipesComponent implements OnInit {
 
 
   public onAddNewRecipe(): void {
-    this.router.navigate(["add-recipe"] ); 
+    this.router.navigate(["add-recipe"], {state: {cookbookId: this.cookbook.id}} ); 
 
   }
 

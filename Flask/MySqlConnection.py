@@ -140,7 +140,36 @@ def getUserBysessionKey(sessionKey):
 
         closeSqlConnection(connection)
 
-        return records       
+        return records      
+
+def addRecipe(cookbookId, userId, name, directions, ingredients):
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcs.addRecipe], [cookbookId, userId, name, directions, ingredients])
+
+        connection.commit()
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
+
+        resp = Response((records[0] , 'Recipe added successfully!'), 200)
+
+        closeSqlConnection(connection)
+        return resp
+
+def getRecipe(recipeId):
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcs.getRecipe], [recipeId ])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
+
+        closeSqlConnection(connection)
+
+        return records 
 
 def createSqlConnection():
     try:

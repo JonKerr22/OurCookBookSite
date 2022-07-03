@@ -1,7 +1,10 @@
 export class Recipe {
     public readonly id: number;
-    public name: string;
-    public recipeText: string;
+    public cookbookId?: number;
+    public userId?: number;
+    public name?: string;
+    public directions?: string;
+    public ingredients?: string;
 
 
     // TODO - eventually this will turn into an entry in a recipe history log

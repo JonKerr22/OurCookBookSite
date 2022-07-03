@@ -68,4 +68,14 @@ export class RestService implements OnInit {
     return this.httpClient.post(registerUserUrl, {userId}, this.httpJsonOptions);
   }
 
+  public addRecipe(cookbookId: number, userId: number, name: string, directions: string, ingredients: string): Observable<any> {
+    const addRecipeUrl = `${this.apiUrlBase}/addNewRecipe`;
+    return this.httpClient.post(addRecipeUrl, { cookbookId, userId, name, directions, ingredients }, this.httpJsonOptions);
+  }
+
+  public getRecipe(recipeId: number): Observable<any> {
+    const getRecipeUrl = `${this.apiUrlBase}/getRecipe`;
+    return this.httpClient.post(getRecipeUrl, {recipeId}, this.httpJsonOptions);
+  }
+
 }

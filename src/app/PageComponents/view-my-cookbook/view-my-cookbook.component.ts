@@ -5,6 +5,7 @@ import { MyCookbookResolverService } from 'src/app/Resolvers/my-cookbook-resolve
 import { User } from 'src/app/Models/user';
 import { Recipe } from 'src/app/Models/recipe';
 import { RestService } from 'src/app/Services/rest.service';
+import { Cookbook } from 'src/app/Models/cookbook';
 
 @Component({
   selector: 'app-view-my-cookbook',
@@ -32,17 +33,20 @@ export class ViewMyCookbookComponent implements OnInit {
     return this.userInfo.id ?? -1;
   }
   public get hasCookbook(): boolean {
-    return !!this.myCookbookResolverService.cookbookInfo;
+    return !!this.cookbook;
+  }
+  public get cookbook(): Cookbook {
+    return this.myCookbookResolverService.cookbookInfo;
   }
   public get cookbookName(): string {
-    return this.myCookbookResolverService.cookbookInfo.cookbook_name;
+    return this.cookbook.cookbook_name;
   }
 
   public get tempRecipes(): Recipe[] {
-    let r1: Recipe = {id: 1, name: 'pizza', recipeText: 'make the pizza'};
+    let r1: Recipe = {id: 1, name: 'pizza', directions: 'make the pizza'};
     return [
       r1,
-      {id: 2, name: 'cake', recipeText: 'make the cake'}
+      {id: 2, name: 'cake', directions: 'make the cake'}
     ];
   }
 

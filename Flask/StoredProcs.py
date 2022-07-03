@@ -10,7 +10,9 @@ class SqlStoredProcs(Enum):
     addUser = 7,
     getUserByUsername = 8,
     getUserBySessionKey = 9,
-    getUserCookbook = 10
+    getUserCookbook = 10,
+    addRecipe = 11,
+    getRecipe = 12
 
 storedProcMap = {
     SqlStoredProcs.firstTableAll : 'getFirstTableAll',
@@ -22,5 +24,7 @@ storedProcMap = {
     SqlStoredProcs.addUser: 'addUser',
     SqlStoredProcs.getUserByUsername: 'getUserByUsername',
     SqlStoredProcs.getUserBySessionKey: 'getUserBySessionKey',
-    SqlStoredProcs.getUserCookbook: 'getUserCookbook'
+    SqlStoredProcs.getUserCookbook: 'getUserCookbook',
+    SqlStoredProcs.addRecipe: 'addRecipe',
+    SqlStoredProcs.getRecipe: 'getRecipe'
 }
