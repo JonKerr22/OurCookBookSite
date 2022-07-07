@@ -128,6 +128,16 @@ def GetRecipe():
         return jsonify([None])
     return jsonify(resp)
 
+@app.route("/getAllCookbookRecipes", methods=['POST'])
+def GetAllCookbookRecipes():
+    dataJson = request.json
+    cookbookId = dataJson['cookbookId']
+    resp = getAllCookbookRecipes(cookbookId)
+
+    if(len(resp) < 1):
+        return jsonify([None])
+    return jsonify(resp)
+
 
 
 if __name__ == '__main__':

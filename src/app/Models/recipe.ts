@@ -7,6 +7,15 @@ export class Recipe {
     public ingredients?: string;
 
 
+    public constructor(pythonArr: Array<any>){
+        this.id = pythonArr[0];
+        this.cookbookId = pythonArr[1];
+        this.userId   = pythonArr[2];
+        this.name = pythonArr[3];
+        this.directions = pythonArr[4];
+        this.ingredients = pythonArr[5];
+    }
+
     // TODO - eventually this will turn into an entry in a recipe history log
     //      - but that is far in the future
 

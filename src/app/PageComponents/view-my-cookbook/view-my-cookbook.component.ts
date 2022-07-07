@@ -6,6 +6,7 @@ import { User } from 'src/app/Models/user';
 import { Recipe } from 'src/app/Models/recipe';
 import { RestService } from 'src/app/Services/rest.service';
 import { Cookbook } from 'src/app/Models/cookbook';
+import { AllRecipesResolverService } from 'src/app/Resolvers/all-recipes-resolver.service';
 
 @Component({
   selector: 'app-view-my-cookbook',
@@ -18,7 +19,9 @@ export class ViewMyCookbookComponent implements OnInit {
 
   constructor(private userSessionkeyResolver : UserSessionkeyResolverService, // TODO - maybe make a logged in page base that includes this to always make user info available
               private myCookbookResolverService: MyCookbookResolverService,
-              private restService: RestService) { }
+              private restService: RestService,
+              private allRecipesResolver: AllRecipesResolverService) { }
+
 
   ngOnInit(): void {
   }
@@ -41,13 +44,13 @@ export class ViewMyCookbookComponent implements OnInit {
   public get cookbookName(): string {
     return this.cookbook.cookbook_name;
   }
+  public get allRecipes(): Recipe[] {
+    return this.allRecipesResolver.recipeList;
+  }
 
-  public get tempRecipes(): Recipe[] {
-    let r1: Recipe = {id: 1, name: 'pizza', directions: 'make the pizza'};
-    return [
-      r1,
-      {id: 2, name: 'cake', directions: 'make the cake'}
-    ];
+  public onRefreshRecipes(): Promise<void> { // TODO - cannot be permanent solution
+    this.allRecipesResolver.refreshList(this.cookbook.id);
+    return;
   }
 
   public onCreateCookbook(): Promise<void> {

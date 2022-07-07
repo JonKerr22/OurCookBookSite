@@ -171,6 +171,19 @@ def getRecipe(recipeId):
 
         return records 
 
+def getAllCookbookRecipes(cookbookId):
+    connection = createSqlConnection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        cursor.callproc(storedProcMap[SqlStoredProcs.getAllCookbookRecipes], [cookbookId ])
+        records = []
+        for result in cursor.stored_results():
+            records += result.fetchall()
+
+        closeSqlConnection(connection)
+
+        return records 
+
 def createSqlConnection():
     try:
         connection = mysql.connector.connect(host='localhost',
