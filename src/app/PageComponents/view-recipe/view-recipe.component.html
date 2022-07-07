@@ -1,1 +1,24 @@
-<p>view-recipe works!</p>
+<app-header [displayHomepageHeaderOptions]='false' [username]='usersName'></app-header>
+
+<div class="container">
+    <div class="row">
+        <p>{{recipeName}}</p>
+    </div>
+    <div class="row">
+        <p>{{recipeIngredients}}</p>
+    </div>
+    <div class="row">
+        <p>{{recipeDirections}}</p>
+    </div>
+
+
+    <div class="row">
+        <button type="button" class="btn" (click)='onShare()'>Share</button>
+    </div>
+    
+    <div class="row"><!-- TODO - needs to be optional if nobody logged in -->
+        <button type="button" class="btn" (click)='onBackToCookbbok()'>Back To Cookbook</button>
+    </div>
+</div>
+
+

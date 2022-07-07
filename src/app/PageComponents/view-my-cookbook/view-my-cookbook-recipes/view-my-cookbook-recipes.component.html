@@ -2,7 +2,7 @@
 <div *ngIf='hasRecipes'>
     <p>Here are your current recipes:</p>
     <p *ngFor="let r of recipes; let i = index">
-        {{r.name}}
+        <span class="hand-icon" (click)='onViewRecipe(r.id)'>{{r.name}}</span>
     </p>
 
 </div>

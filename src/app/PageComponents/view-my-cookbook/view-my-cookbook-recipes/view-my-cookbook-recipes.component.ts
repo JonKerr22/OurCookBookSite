@@ -28,4 +28,9 @@ export class ViewMyCookbookRecipesComponent implements OnInit {
 
   }
 
+  public onViewRecipe(recipeId: number): void {
+    //TODO - this routing process may be updated
+    this.router.navigate(["view-recipe", recipeId] );
+  }
+
 }
