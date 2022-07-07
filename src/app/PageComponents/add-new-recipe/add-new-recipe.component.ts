@@ -48,8 +48,17 @@ export class AddNewRecipeComponent implements OnInit { // TODO - make sure the r
     }
     this.restService.addRecipe(this.cookbookId, this.userInfo.id, this.recipeName, this.directionsText, this.ingredientText).subscribe((x) => {
       const resp: AddRecipeResponse = new AddRecipeResponse(x);
+      
+      if(!resp.valid){
+        alert('recipe not added');
+        window.location.reload(); // TODO - this should be better
+      }
+      else {
+        //console.log(`successfully added in new recipe with id: ${resp.id}`);
+        this.router.navigate(["view-recipe", resp.id] );
 
-      // TODO - use resp.id to route to the view recipe page for the newly added recipe
+      }
+      
     });
   }
 }
