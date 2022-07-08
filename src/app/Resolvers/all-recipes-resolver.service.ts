@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Navigation, Router } from '@angular/router';
 import { RestService } from '../Services/rest.service';
 import { Recipe } from '../Models/recipe';
 import { of, Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllRecipesResolverService  implements Resolve<any>  {
 
-  constructor(private restService: RestService) { }
+  constructor(private restService: RestService,
+              private router: Router) { }
 
   public recipeList: Recipe[] = [];
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | Observable<any> | Promise<any> {
-    // TODO - unsure how to go about using this honestly
-    console.log(`route info: ${route}\n\nstate info: ${state}`);
-    /*if (route.){
-      this.cookbookId = +nav.extras.state.cookbookId;
-    }*/
 
-    return of(true);
-  }
-
-  public refreshList(cookbookId: number): void { //TODO - possible that this will get removed and this whole thing gets redone
+    const nav: Navigation = this.router.getCurrentNavigation();
+    let cookbookId: number = -1;
+    if (nav.extras && nav.extras.state && nav.extras.state.cookbookId){
+      cookbookId = +nav.extras.state.cookbookId;
+    }
+    if(cookbookId === -1) { //maybe have it check for a route parameter also? idk
+      console.log('neg 1 cookbook');
+      this.recipeList = [];
+      return of(false);
+    }
     this.restService.getAllCookbookRecipes(cookbookId).subscribe((pythonResp: Array<any>) => {
       
 
@@ -38,6 +39,5 @@ export class AllRecipesResolverService  implements Resolve<any>  {
       }
       return of(true);
     });
-
   }
 }

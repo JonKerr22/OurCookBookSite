@@ -49,6 +49,6 @@ export class ViewRecipeComponent implements OnInit {
   }
 
   public onBackToCookbbok(): void {
-    this.router.navigate(["view-my-cookbook", this.userId] ); 
+    this.router.navigate(["view-my-cookbook", this.userId], {state: {cookbookId: this.recipe.cookbookId}} ); 
   }
 }

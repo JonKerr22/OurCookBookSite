@@ -10,6 +10,7 @@ import { UserSessionkeyResolverService } from './Resolvers/user-sessionkey-resol
 import { AddNewRecipeComponent } from './PageComponents/add-new-recipe/add-new-recipe.component';
 import { RecipeResolverService } from './Resolvers/recipe-resolver.service';
 import { ViewRecipeComponent } from './PageComponents/view-recipe/view-recipe.component';
+import { AllRecipesResolverService } from './Resolvers/all-recipes-resolver.service';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'view-my-cookbook/:userId', component: ViewMyCookbookComponent,
                             canActivate : [AuthGuard], 
                             resolve: { userInfo: UserSessionkeyResolverService,
-                                       cookbook: MyCookbookResolverService}
+                                       cookbook: MyCookbookResolverService,
+                                       recipeList: AllRecipesResolverService}
   },
   { path: 'add-recipe', component: AddNewRecipeComponent,
                             canActivate : [AuthGuard], 

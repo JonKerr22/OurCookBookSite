@@ -23,7 +23,6 @@
     <div class="row">
         <div class="col-md-9 text-left">
             <h4>{{usersName}} Cookbook: {{cookbookName}}</h4>
-            <button type="button" class="btn" (click)='onRefreshRecipes()'>Refresh Recipe List</button> <!-- TODO - cannot be permanent solution  -->   
             <app-view-my-cookbook-recipes [recipes]='allRecipes' [cookbook]='cookbook'></app-view-my-cookbook-recipes>
         </div>
         <div class="col-md-3">

@@ -48,11 +48,6 @@ export class ViewMyCookbookComponent implements OnInit {
     return this.allRecipesResolver.recipeList;
   }
 
-  public onRefreshRecipes(): Promise<void> { // TODO - cannot be permanent solution
-    this.allRecipesResolver.refreshList(this.cookbook.id);
-    return;
-  }
-
   public onCreateCookbook(): Promise<void> {
     if(!this.newCookBookName){
       alert('Please enter a cookbook name'); // TODO - better alert
