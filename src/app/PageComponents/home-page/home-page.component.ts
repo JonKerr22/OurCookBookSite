@@ -42,7 +42,7 @@ export class HomePageComponent implements OnInit {
       const registerResp = new RegisterUserResponse(x);
       if(registerResp.valid){
         this.authService.setLogin(registerResp.sessionKey);
-        this.router.navigate(["view-my-cookbook"]);
+        this.router.navigate(["view-my-cookbook", registerResp.newUserId], {state: {cookbookId: -1}} );
       }
     });
   }

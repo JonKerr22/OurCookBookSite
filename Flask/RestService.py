@@ -76,7 +76,8 @@ def RegisterUser():
 
     resp = addUser(username, encryptedPasswordAsStr, sessionKeyString)
     if(resp[0].status_code == 200):
-        return jsonify([True, sessionKeyString])
+        newUserId = resp[0].msg[0][0] #TODO - maybe the object needs a better structure
+        return jsonify([True, sessionKeyString, newUserId])
     return jsonify(resp)
 
 @app.route("/confirmLogin", methods=['POST'])
