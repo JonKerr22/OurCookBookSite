@@ -22,7 +22,6 @@ export class AllRecipesResolverService  implements Resolve<any>  {
       cookbookId = +nav.extras.state.cookbookId;
     }
     if(cookbookId === -1) { //maybe have it check for a route parameter also? idk
-      console.log('neg 1 cookbook');
       this.recipeList = [];
       return of(false);
     }

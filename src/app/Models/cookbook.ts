@@ -9,4 +9,5 @@ export class Cookbook {
         this.user_id = pythonArr[1];
         this.cookbook_name   = pythonArr[2];
     }
+    public isUnlabeled(): boolean { return !!this.cookbook_name; }
 }

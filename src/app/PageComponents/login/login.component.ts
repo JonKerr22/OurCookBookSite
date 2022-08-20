@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 import { RestService } from 'src/app/Services/rest.service';
 import { LoginConfirmationResponse } from 'src/app/Responses/login-confirmation-response';
 import { AuthService } from 'src/app/Services/auth.service';
-import { of } from 'rxjs';
 import { Cookbook } from 'src/app/Models/cookbook';
+import { DefaultCookbook } from 'src/app/Constants/default-objects';
 
 @Component({
   selector: 'app-login',
@@ -37,17 +38,15 @@ export class LoginComponent implements OnInit {
         alert('Invalid username or password'); // TODO - better alert
         return ;
       }
-      let userCookbook: Cookbook;
+      let userCookbook: Cookbook = DefaultCookbook;
       this.restService.getUserCookbook(loginSuccess.userInfo.id).subscribe((pythonResp: Array<any>) => { //nested subscribes is not great, do a more complicated api and DB call to make this a unified response with all the needed info
 
-        if(pythonResp.length > 0 && !pythonResp[0]) { //empty response
-          
-          return of(false);
+        if(pythonResp.length > 0 && pythonResp[0]) {
+          userCookbook = new Cookbook(pythonResp[0]);
         }
         
-        userCookbook = new Cookbook(pythonResp[0]);
         this.authService.setLogin(loginSuccess.userInfo.session_key);
-        this.router.navigate(["view-my-cookbook", loginSuccess.userInfo.id], {state: {cookbookId: userCookbook.id}} ); 
+        this.router.navigate(["view-my-cookbook", loginSuccess.userInfo.id], {state: {cookbookId: userCookbook.isUnlabeled() ? -1 : userCookbook.id}} ); 
         
         return of(true);
       });
