@@ -37,15 +37,13 @@ export class AddNewRecipeComponent implements OnInit { // TODO - make sure the r
   public get userInfo(): User | undefined {
     return this.userSessionkeyResolver.userInfo;
   }
-  public get usersName(): string {
-    return this.userInfo ? this.userInfo.full_name : '';
-  }
 
   public onAddRecipe(): void {
     if(!this.recipeName){
       alert('Please enter a recipe name'); // TODO - better alert
       return;
     }
+    // TODO - directions and ingredients need to be encoded as html strings
     this.restService.addRecipe(this.cookbookId, this.userInfo.id, this.recipeName, this.directionsText, this.ingredientText).subscribe((x) => {
       const resp: AddRecipeResponse = new AddRecipeResponse(x);
       

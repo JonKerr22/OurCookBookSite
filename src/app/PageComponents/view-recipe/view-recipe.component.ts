@@ -23,9 +23,6 @@ export class ViewRecipeComponent implements OnInit {
   public get userInfo(): User | undefined {
     return this.userSessionkeyResolver.userInfo;
   }
-  public get usersName(): string {
-    return this.userInfo ? this.userInfo.full_name : '';
-  }
   public get userId(): number {
     return this.userInfo.id ?? -1;
   }
