@@ -40,11 +40,9 @@ export class LoginComponent implements OnInit {
       }
       let userCookbook: Cookbook = DefaultCookbook;
       this.restService.getUserCookbook(loginSuccess.userInfo.id).subscribe((pythonResp: Array<any>) => { //nested subscribes is not great, do a more complicated api and DB call to make this a unified response with all the needed info
-
-        if(pythonResp.length > 0 && pythonResp[0]) {
+        if(pythonResp.length > 0 && !!pythonResp[0]) {
           userCookbook = new Cookbook(pythonResp[0]);
         }
-        
         this.authService.setLogin(loginSuccess.userInfo.session_key);
         this.router.navigate(["view-my-cookbook", loginSuccess.userInfo.id], {state: {cookbookId: userCookbook.isUnlabeled() ? -1 : userCookbook.id}} ); 
         
