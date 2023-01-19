@@ -6,6 +6,8 @@ Code repository to run ourcook.book (domain name pending) locally
 
 ## Start Flask
 
+//TODO - need to update about either global python3 install or if virtualenv needed, have clear instructions
+
 navigate into the ./Flask folder and run command `python3 RestService.py`, 
 
 this can be directly accessed locally through `http://localhost:5000/`

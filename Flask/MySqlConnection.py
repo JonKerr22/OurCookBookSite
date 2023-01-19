@@ -186,13 +186,23 @@ def getAllCookbookRecipes(cookbookId):
 
 def createSqlConnection():
     try:
-        connection = mysql.connector.connect(host='localhost',
-                                         database='OCB_local',
-                                         user='root',
-                                         password='Y9nz2943NAj')
+        connection = mysql.connector.connect(host='dcbdemo.mysql.database.azure.com',
+                                         database='quickstartdb',
+                                         user='jondemo',
+                                         password='1HVkL3c70W')
         return connection
     except Error as e:
         print("Error in MySQL stuff", e)
+
+
+        """
+            old localhost login credentials
+
+            host='localhost',
+                                         database='OCB_local',
+                                         user='root',
+                                         password='Y9nz2943NAj')
+        """
 
 def closeSqlConnection(connection):
     if connection.is_connected():
