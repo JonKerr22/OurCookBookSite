@@ -6,18 +6,27 @@ Code repository to run ourcook.book (domain name pending) locally
 
 ## Start Flask
 
-//TODO - need to update about either global python3 install or if virtualenv needed, have clear instructions
+You need to have python3, pip3, and virutalenv all installed
+Python3 official download:  https://www.python.org/downloads/
+Python3 install guide: https://realpython.com/installing-python/ 
+Pip3 install: https://www.activestate.com/resources/quick-reads/how-to-install-and-use-pip3/ 
+Virutalenv install: https://learnpython.com/blog/how-to-use-virtualenv-python/
 
-navigate into the ./Flask folder and run command `python3 RestService.py`, 
+Navigate into the ./Flask folder and activate the virutal environment by running the command `virtualenv <env_name>` with <env_name> being the name of your choice.
+Next, you need to activate the virutal environment, on mac or linux use the command `source <env_name>/bin/activate`, on windows the command is `.\<env_name>\Scripts\activate`
+Then, to set up the virtual environment you need to install all the dependencies, use the command `pip3 install -r requirements.txt`
+Finally, you can start up the Flask server, run the command command `python3 RestService.py`
 
-this can be directly accessed locally through `http://localhost:5000/`
+This can be directly accessed locally through `http://localhost:5001/`
 
-As note, this is currently hardcoded to access a database that only runs
-on my laptop. It is a longer term goal to get an actual server that holds
-the database, but since this is a personal project that's not next on the list
+As note, the command string is currently hardcoded to the demo server while this gets built up. It should be changed to use Azure Key Vault with a new database server location, name, and password for security. Baby steps for now
+
 
 
 # Front End Directions
+
+You will need to install angular and the angular cli for this 
+Angular + Angular CLI setup: https://angular.io/guide/setup-local
 
 ## Development server
 
